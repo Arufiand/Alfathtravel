@@ -24,7 +24,7 @@
         <!-- Add icons to the links using the .nav-icon class
              with font-awesome or any other icon font library -->
         <li class="nav-item"><!-- Dashboard -->
-          <a href="#" class="nav-link active">
+          <a href="<?php echo base_url().'index.php/web'?>" class="nav-link ">
             <i class="nav-icon fas fa-tachometer-alt"></i>
             <p>
               Dashboard
@@ -35,7 +35,7 @@
           <a href="#" class="nav-link">
             <i class="nav-icon fa fa-truck"></i>
             <p>
-              Pengiriman
+              Pengiriman BELUM
               <i class="fas fa-angle-left right"></i>
             </p>
           </a>
@@ -70,7 +70,7 @@
           <a href="#" class="nav-link">
             <i class="nav-icon fa fa-car"></i>
             <p>
-              Rental
+              Rental BELUM
               <i class="fas fa-angle-left right"></i>
             </p>
           </a>
@@ -105,7 +105,7 @@
           <a href="pages/widgets.html" class="nav-link">
             <i class="nav-icon fa fa-bus"></i>
             <p>
-              Travel
+              Travel BELUM
               <i class="fas fa-angle-left right"></i>
             </p>
           </a>
@@ -147,7 +147,7 @@
           <a href="#" class="nav-link">
             <i class="nav-icon fas fa-edit"></i>
             <p>
-              Kelola E-Travel
+              Kelola E-Travel BELUM
               <i class="fas fa-angle-left right"></i>
             </p>
           </a>
@@ -188,7 +188,7 @@
 
         <li class="nav-header">KELOLA KONTEN WEBSITE</li>
         <li class="nav-item has-treeview">
-          <a href="#" class="nav-link">
+          <a href="#'?>" class="nav-link">
             <i class="nav-icon fas fa-edit"></i>
             <p>
               Kelola Konten
@@ -197,9 +197,15 @@
           </a>
           <ul class="nav nav-treeview">
             <li class="nav-item">
-              <a href="kelolaBerita.php" class="nav-link">
+              <a href="<?php echo base_url().'index.php/berita'?>" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Kelola Berita</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="<?php echo base_url().'index.php/berita/kategori'?>" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Kelola Kategori Berita</p>
               </a>
             </li>
             <li class="nav-item">

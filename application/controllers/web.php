@@ -7,11 +7,20 @@ class Web extends CI_Controller{
   {
     parent::__construct();
     $this->load->helper(array('url'));
+
   }
 
   public function index()
   {
-     $this->load->view('index');
+     $data['judul'] = "Dashboard";
+     $this->load->view('index',$data);
+  }
+  public function kelolaBerita()
+  {
+    $this->load->model('employees');
+     $data['judul'] = "Kelola Berita";
+     $data['dept_emp'] = $this->employees->ambil_data()->result();
+     $this->load->view('kelolaBerita',$data);
   }
 
 }

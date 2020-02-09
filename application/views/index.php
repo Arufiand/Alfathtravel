@@ -1,22 +1,22 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <?php require 'view/head.php'; ?>
+  <?php $this->load->view('view/head'); ?>
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
 
   <!-- Navbar -->
-  <?php require 'view/navbar.php'; ?>
+  <?php $this->load->view('view/navbar'); ?>
   <!-- /.navbar -->
 
   <!-- Main Sidebar Container -->
-  <?php require 'view/sidebar.php'; ?>
+  <?php $this->load->view('view/sidebar'); ?>
 
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
-    <?php require 'view/breadcrumb.php'; ?>
+    <?php $this->load->view('view/breadcrumb'); ?>
     <!-- /.content-header -->
 
     <!-- Main content -->
@@ -610,7 +610,7 @@
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
-<?php require 'view/footer.php'; ?>
+<?php $this->load->view('view/footer'); ?>
   <!-- Control Sidebar -->
   <aside class="control-sidebar control-sidebar-dark">
     <!-- Control sidebar content goes here -->
@@ -619,6 +619,6 @@
 </div>
 <!-- ./wrapper -->
 
-<?php require 'view/js.php'; ?>
+<?php $this->load->view('view/js'); ?>
 </body>
 </html>

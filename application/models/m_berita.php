@@ -7,9 +7,9 @@ class M_berita extends CI_Model{
         // Set table name
         $this->table = 'kontenberita';
         // Set orderable column fields
-        $this->column_order = array(null, 'IdBerita','Id','Judul','Isi','Gambar','TanggalRilis','TanggalKadaluarsa','StatusBerita','WaktuRilis');
+        $this->column_order = array(null, 'Judul','TanggalRilis','TanggalKadaluarsa','StatusBerita','WaktuRilis');
         // Set searchable column fields
-        $this->column_search = array('IdBerita','Id','Judul','Isi','Gambar','TanggalRilis','TanggalKadaluarsa','StatusBerita','WaktuRilis');
+        $this->column_search = array('Judul','TanggalRilis','TanggalKadaluarsa','StatusBerita','WaktuRilis');
         // Set default order
         $this->order = array('IdBerita' => 'asc');
     }
@@ -83,7 +83,11 @@ class M_berita extends CI_Model{
             $this->db->order_by(key($order), $order[key($order)]);
         }
     }
-        function input_kategori($data,$table){
-          $this->db->insert($table, $data);
+        function input_konten($data,$table){
+            $this->db->insert($table, $data);
+          }
+        function ambilDataKategori(){
+            $query = $this->db->get('kategori');
+            return $query;
         }
 }

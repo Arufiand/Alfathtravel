@@ -110,6 +110,7 @@
 <script>
 $(document).ready(function(){
     $('#memListTable').DataTable({
+        "responsive": true,
         // Processing indicator
         "processing": true,
         // DataTables server-side processing mode
@@ -163,9 +164,7 @@ $(document).ready(function () {
   });
 });
 
-$("input[data-bootstrap-switch]").each(function(){
-  $(this).bootstrapSwitch('state', $(this).prop('checked'));
-});
+
 </script>
 
 </body>

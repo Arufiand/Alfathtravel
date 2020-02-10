@@ -37,3 +37,9 @@
 <script src="<?php echo base_url()?>assets/plugins/jquery-validation/additional-methods.min.js"></script>
 <!-- bootstrap switch -->
 <script src="<?php echo base_url()?>assets/plugins/bootstrap-switch/js/bootstrap-switch.min.js"></script>
+<script src="<?php echo base_url()?>assets/datatable/responsive/responsive.js"></script>
+<script>
+$("input[data-bootstrap-switch]").each(function(){
+  $(this).bootstrapSwitch('state', $(this).prop('checked'));
+});
+</script>

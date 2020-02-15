@@ -14,11 +14,11 @@
   <?php $this->load->view('view/sidebar');?>
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
-      <!-- Content Header (Page header) -->
-      <?php $this->load->view('view/breadcrumb'); ?>
-
-      <section class="content">
+  <!-- Content Header (Page header) -->
+  <?php $this->load->view('view/breadcrumb'); ?>
+  <section class="content">
         <div class="container-fluid">
+          <?php $this->load->view('view/notif'); ?>
         <!--Inputan-->
         <div class="card card-warning">
           <div class="card-header">
@@ -37,11 +37,11 @@
                 <div class="col-sm-6">
                   <div class="form-group">
                     <label for="exampleInputEmail1">Kategori Baru</label>
-                    <input type="text" name="kategoris" class="form-control" id="kategoris" placeholder="Nama Kategori Berita">
+                    <input type="text" name="kategori" class="form-control" id="kategori" placeholder="Nama Kategori Berita">
                   </div>
                   <div class="form-group">
                     <label for="exampleInputEmail1">Status Kategori     </label>
-                    <input type="checkbox" name="status" value=1 checked data-bootstrap-switch>
+                    <input type="checkbox" name="inputStatus" value=1 checked data-bootstrap-switch>
                   </div>
                 </div>
 
@@ -72,7 +72,6 @@
               <thead>
                   <tr>
                     <th>No</th>
-                    <th>Id Kategori</th>
                     <th>Nama Kategori</th>
                     <th>Status Kategori</th>
                   </tr>
@@ -80,7 +79,6 @@
               <tfoot>
                   <tr>
                     <th>No</th>
-                    <th>Id Kategori</th>
                     <th>Nama Kategori</th>
                     <th>Status Kategori</th>
                   </tr>
@@ -107,29 +105,7 @@
 <!-- ./wrapper -->
 <?php $this->load->view('view/js');?>
 <!-- jQuery -->
-<script>
-$(document).ready(function(){
-    $('#memListTable').DataTable({
-        "responsive": true,
-        // Processing indicator
-        "processing": true,
-        // DataTables server-side processing mode
-        "serverSide": true,
-        // Initial no order.
-        "order": [],
-        // Load data from an Ajax source
-        "ajax": {
-            "url": "<?php echo base_url('index.php/berita/getListsKategori/'); ?>",
-            "type": "POST"
-        },
-        //Set column definition initialisation properties
-        "columnDefs": [{
-            "targets": [0],
-            "orderable": false
-        }]
-    });
-});
-</script>
+
 
 <script type="text/javascript">
 $(document).ready(function () {
@@ -140,13 +116,13 @@ $(document).ready(function () {
   });
   $('#quickForm').validate({
     rules: {
-      kategoris: {
+      kategori: {
         required: true,
-        kategoris: true,
+        kategori: true,
       }
     },
     messages: {
-      kategoris: {
+      kategori: {
         required: "Tolong Inputkan Kategori!"
       }
     },
@@ -163,8 +139,6 @@ $(document).ready(function () {
     }
   });
 });
-
-
 </script>
 
 </body>

@@ -7,9 +7,9 @@ class M_kategori extends CI_Model{
         // Set table name
         $this->table = 'kategori';
         // Set orderable column fields
-        $this->column_order = array(null, 'IdKategori','NamaKategori','StatusKategori');
+        $this->column_order = array(null, 'NamaKategori','StatusKategori');
         // Set searchable column fields
-        $this->column_search = array('IdKategori','NamaKategori','StatusKategori');
+        $this->column_search = array('NamaKategori','StatusKategori');
         // Set default order
         $this->order = array('IdKategori' => 'asc');
     }

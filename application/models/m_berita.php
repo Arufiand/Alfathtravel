@@ -7,9 +7,9 @@ class M_berita extends CI_Model{
         // Set table name
         $this->table = 'kontenberita';
         // Set orderable column fields
-        $this->column_order = array(null, 'Judul','TanggalRilis','TanggalKadaluarsa','StatusBerita','WaktuRilis');
+        $this->column_order = array(null, 'Judul','TanggalRilis','TanggalKadaluarsa','WaktuRilis','StatusBerita');
         // Set searchable column fields
-        $this->column_search = array('Judul','TanggalRilis','TanggalKadaluarsa','StatusBerita','WaktuRilis');
+        $this->column_search = array('Judul','TanggalRilis','TanggalKadaluarsa','WaktuRilis','StatusBerita');
         // Set default order
         $this->order = array('IdBerita' => 'asc');
     }

@@ -8,6 +8,7 @@ class Berita extends CI_Controller{
         $this->load->model('m_berita');
         $this->load->model('m_kategori');
         $this->load->helper('date');
+        $this->load->library('form_validation');
         date_default_timezone_set('Asia/Jakarta');
 
     }
@@ -23,13 +24,14 @@ class Berita extends CI_Controller{
     function inputKonten()
     {
       //auto increment
+      $this->form_validation->set_rules('judul','Judul Berita','required');
       $query= $this->db->query("SELECT MAX(IdBerita) as Max_ID from kontenberita");
       $row = $query->row_array();
       $id = $row['Max_ID'];
       $ids = $id +1;
       //Config Gambar Upload
-    //  $config['upload_path']          = './gambar/';
-  	//	$config['allowed_types']        = 'gif|jpg|png';
+      //$config['upload_path']          = './gambar/';
+  	  //$config['allowed_types']        = 'gif|jpg|png';
   		//$config['max_size']             = 100;
   		//$config['max_width']            = 1024;
   		//$config['max_height']           = 768;
@@ -43,7 +45,9 @@ class Berita extends CI_Controller{
   	//		$data = array('upload_data' => $this->upload->data());
   	//		$this->load->view('v_upload_sukses', $data);
       //Config Gambar Upload
+
       //auto increment end
+       if($this->form_validation->run() != false){
               $judul= $this->input->post('judul');
               $kategori = $this->input->post('Kategori');
               $status = $this->input->post('status');
@@ -61,19 +65,17 @@ class Berita extends CI_Controller{
               }
               $data = array (
                 'IdBerita' => $ids,
-                'IdKategori' => $kategori,
-                'Id' => $IdU,
                 'Judul' => $judul,
                 'TanggalRilis' => $TglRilis,
                 'TanggalKadaluarsa' => $TglKadaluarsa,
-                'StatusBerita' => $stat,
-                'WaktuRilis' => $waktu
+                'WaktuRilis' => $waktu,
+                'StatusBerita' => $stat
               );
 
               $this->m_berita->input_konten($data,'kontenberita');
               redirect ('index.php/berita');
           }
-
+      }
     function getListsBerita(){
         $data = $row = array();
 
@@ -83,15 +85,16 @@ class Berita extends CI_Controller{
         $i = $_POST['start'];
         foreach($memData as $member){
             $i++;
-            $tgl_rilis = date( 'jS M Y', strtotime($member->TanggalRilis));
-            $tgl_kadaluarsa = date( 'jS M Y', strtotime($member->TanggalKadaluarsa));
+            $tgl_rilis = date( 'j F Y', strtotime($member->TanggalRilis));
+            $tgl_kadaluarsa = date( 'j F Y', strtotime($member->TanggalKadaluarsa));
+            $status = ($member->StatusBerita == 1)?'Active':'Inactive';
             $data[] = array(
             $i,
             $member->Judul,
             $tgl_rilis,
             $tgl_kadaluarsa,
             $member->WaktuRilis,
-            $member->StatusBerita
+            $status
           );
         }
 
@@ -129,7 +132,6 @@ class Berita extends CI_Controller{
              $status = ($member->StatusKategori == 1)?'Active':'Inactive';
              $data[] = array(
              $i,
-             $member->IdKategori,
              $member->NamaKategori,
              $status
              );
@@ -148,14 +150,17 @@ class Berita extends CI_Controller{
 
      function inputKategori()
      {
+       //form_validation
+       $this->form_validation->set_rules('kategori','Kategori','required');
        //auto increment
        $query= $this->db->query("SELECT MAX(IdKategori) as Max_ID from kategori");
        $row = $query->row_array();
        $id = $row['Max_ID'];
        $ids = $id +1;
        //auto increment end
-               $kategori = $this->input->post('kategoris');
-               $status = $this->input->post('status');
+       if($this->form_validation->run() != false){
+               $kategori = $this->input->post('kategori');
+               $status = $this->input->post('inputStatus');
                if ($status == 1){
                  $stat = 1;
                } else{
@@ -166,11 +171,11 @@ class Berita extends CI_Controller{
                  'NamaKategori' => $kategori,
                  'StatusKategori' => $stat
                );
-
-               $this->m_berita->input_kategori($data,'kategori');
+               $this->session->set_flashdata('success', 'Berhasil disimpan');
+               $this->m_kategori->input_kategori($data,'kategori');
                redirect ('index.php/berita/kategori');
            }
-
+      }
 
 
 

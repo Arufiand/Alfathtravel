@@ -21,6 +21,7 @@
     <!-- Main content -->
     <section class="content">
       <div class="container-fluid">
+        <?php $this->load->view('view/notif'); ?>
       <!--Inputan-->
       <div class="card card-warning">
         <div class="card-header">
@@ -46,6 +47,15 @@
                            <?php endforeach;?>
                        </select>
                     </div>
+                    <div class="form-group">
+                      <label for="exampleInputFile">File input</label>
+                      <div class="input-group">
+                        <div class="custom-file">
+                          <input type="file" class="custom-file-input" id="exampleInputFile">
+                          <label class="custom-file-label" for="exampleInputFile">Choose file</label>
+                        </div>
+                      </div>
+                    </div>
 
                 </div>
 
@@ -54,25 +64,26 @@
                     <div class="col-sm-6">
                       <div class="form-group">
                             <label for="exampleInputEmail1">Tanggal Rilis</label>
-                            <input type="date" name="TglRilis" class="form-control" id="TglRilis" placeholder="Isi judul Berita">
+                            <input type="date" name="TglRilis" class="form-control" id="TglRilis" required>
                           </div>
                           <div class="form-group">
                             <label for="exampleInputEmail1">Waktu rilis berita</label>
                             <input type="text" name="Waktu" class="form-control" id="Waktu"
                             placeholder="<?php
                             date_default_timezone_set('Asia/Jakarta');
-                            $format = "%H:%i %A";
+                            $format = "%G:%i:%s";
                             echo mdate($format); ?>" disabled>
                           </div>
                     </div>
                     <div class="col-sm-6">
                       <div class="form-group">
                         <label for="exampleInputEmail1">Tanggal Kadaluarsa</label>
-                        <input type="date" name="TglKadaluarsa" class="form-control" id="TglKadaluarsa" placeholder="Isi judul Berita">
+                        <input type="date" name="TglKadaluarsa" class="form-control" id="TglKadaluarsa" required>
                       </div>
+                      <?php //tambahkan fungsi Author nanti ?>
                       <div class="form-group">
                         <label for="exampleInputEmail1">Status Berita</label></br>
-                        <input type="checkbox" name="status" value=1 checked data-bootstrap-switch>
+                        <input type="checkbox" name="status" value=0 data-bootstrap-switch>
                       </div>
                     </div>
                 </div>
@@ -86,7 +97,6 @@
           <!-- /.card-body -->
           <div class="card-footer">
             <button type="submit" class="btn btn-primary">Submit</button>
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
           </div>
         </form>
       </div>
@@ -97,8 +107,8 @@
         <div class="card-header">
           <h3 class="card-title">Data Berita Website Alfath</h3>
           <div class="card-tools">
-            <button type="button" class="btn btn-tool btn-sm" data-card-widget="collapse" data-toggle="tooltip"
-                    title="Collapse" active>
+            <button type="button" class="btn btn-tool btn-sm" data-card-widget="collapse hide" data-toggle="tooltip"
+                    title="Collapse">
               <i class="fas fa-minus"></i></button>
           </div>
         </div>
@@ -111,9 +121,9 @@
                     <th>Judul Berita</th>
                     <th>Tanggal Rilis</th>
                     <th>Tanggal Kadaluarsa</th>
-                    <th>Status Berita</th>
                     <th>Waktu Rilis</th>
-                </tr>
+                    <th>Status Berita</th>
+                  </tr>
             </thead>
             <tfoot>
                 <tr>
@@ -121,8 +131,8 @@
                   <th>Judul Berita</th>
                   <th>Tanggal Rilis</th>
                   <th>Tanggal Kadaluarsa</th>
-                  <th>Status Berita</th>
                   <th>Waktu Rilis</th>
+                  <th>Status Berita</th>
                 </tr>
             </tfoot>
           </table>
@@ -148,31 +158,38 @@
 <!-- ./wrapper -->
 <?php $this->load->view('view/js');?>
 <!-- jQuery -->
-<script>
-$(document).ready(function(){
-    $('#memListTable').DataTable({
-        "responsive": true,
-        // Processing indicator
-        "processing": true,
-        // DataTables server-side processing mode
-        "serverSide": true,
-        // Initial no order.
-        "order": [],
-        // Load data from an Ajax source
-        "ajax": {
-            "url": "<?php echo base_url('index.php/berita/getListsBerita/'); ?>",
-            "type": "POST"
-        },
-        //Set column definition initialisation properties
-        "columnDefs": [{
-            "targets": [0],
-            "orderable": false
-        }]
-    });
+<script type="text/javascript">
+$(document).ready(function () {
+  $.validator.setDefaults({
+    submitHandler: function () {
+      alert( "Form successful submitted!" );
+    }
+  });
+  $('#quickForm').validate({
+    rules: {
+      judul: {
+        required: true,
+        judul: true,
+      }
+    },
+    messages: {
+      judul: {
+        required: "Tolong Inputkan judul!"
+      }
+    },
+    errorElement: 'span',
+    errorPlacement: function (error, element) {
+      error.addClass('invalid-feedback');
+      element.closest('.form-group').append(error);
+    },
+    highlight: function (element, errorClass, validClass) {
+      $(element).addClass('is-invalid');
+    },
+    unhighlight: function (element, errorClass, validClass) {
+      $(element).removeClass('is-invalid');
+    }
+  });
 });
 </script>
-
-
-
 </body>
 </html>

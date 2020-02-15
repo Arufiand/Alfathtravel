@@ -3,6 +3,7 @@
 <script>
   $.widget.bridge('uibutton', $.ui.button)
 </script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <!-- Bootstrap 4 -->
 <script src="<?php echo base_url()?>assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- ChartJS -->
@@ -41,5 +42,36 @@
 <script>
 $("input[data-bootstrap-switch]").each(function(){
   $(this).bootstrapSwitch('state', $(this).prop('checked'));
+});
+</script>
+
+<?php
+if ($judul == "Kelola Kategori"){
+   $direktori="index.php/berita/getListsKategori/";
+} else if ($judul == "Kelola Berita"){
+  $direktori="index.php/berita/getListsBerita/";
+}
+?>
+<script>
+$(document).ready(function(){
+    $('#memListTable').DataTable({
+        "responsive": true,
+        // Processing indicator
+        "processing": true,
+        // DataTables server-side processing mode
+        "serverSide": true,
+        // Initial no order.
+        "order": [],
+        // Load data from an Ajax source
+        "ajax": {
+            "url": "<?php echo base_url("$direktori"); ?>",
+            "type": "POST"
+        },
+        //Set column definition initialisation properties
+        "columnDefs": [{
+            "targets": [0],
+            "orderable": false
+        }]
+    });
 });
 </script>

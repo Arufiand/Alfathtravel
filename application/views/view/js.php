@@ -1,8 +1,8 @@
 <script src="<?php echo base_url()?>assets/datatable/jQuery/jquery.min.js"></script>
 
-<script>
+<!-- <script>
   $.widget.bridge('uibutton', $.ui.button)
-</script>
+</script> -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <!-- Bootstrap 4 -->
 <script src="<?php echo base_url()?>assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -46,10 +46,16 @@ $("input[data-bootstrap-switch]").each(function(){
 </script>
 
 <?php
-if ($judul == "Kelola Kategori"){
+if ($judul == "Kelola Kategori")
+{
    $direktori="index.php/berita/getListsKategori/";
-} else if ($judul == "Kelola Berita"){
+} else if ($judul == "Kelola Berita")
+{
   $direktori="index.php/berita/getListsBerita/";
+}
+ else if ($judul == "Kelola Staff")
+{
+  $direktori="index.php/kelola/getListsStaff/";
 }
 ?>
 <script>

@@ -25,7 +25,7 @@
       <!--Inputan-->
       <div class="card card-warning">
         <div class="card-header">
-          <h3 class="card-title">Post Berita</h3>
+          <h3 class="card-title">Post <?php echo $surname?></h3>
         </div>
         <!-- /.card-header -->
         <!-- form start -->
@@ -34,64 +34,46 @@
             <div class="row">
 
               <div class="col-sm-6">
-                <label for="exampleInputEmail1"><h4>Informasi Berita</h4></label>
+                <label for="exampleInputEmail1"><h4>Informasi <?php echo $surname?></h4></label>
                     <div class="form-group">
-                      <label for="exampleInputEmail1">Judul Berita</label>
-                      <input type="text" name="judul" class="form-control" id="judul" placeholder="Isi judul Berita" style="width: 100%;" >
+                      <label for="exampleInputEmail1">Nama / Merk Kendaraan</label>
+                      <input type="text" name="Nama" class="form-control" id="Nama" placeholder="Nama / Merk Kendaraan" style="width: 100%" >
                     </div>
                     <div class="form-group">
-                      <label for="exampleInputEmail1">Kategori</label>
-                      <select class="form-control" name="Kategori" id="Kategori" required style="width: 100%;" >
-                           <option value="">No Selected</option>
-                           <?php foreach($kategori as $row):?>
-                           <option value="<?php echo $row->IdKategori;?>"><?php echo $row->NamaKategori;?></option>
-                           <?php endforeach;?>
-                       </select>
+                      <label for="exampleInputEmail1">Jenis Kendaraan</label>
+                      <input type="text" name="Jenis" class="form-control" id="Jenis" placeholder="Jenis Kendaraan" style="width: 100%" >
                     </div>
-                    <div class="form-group">
-                      <label for="exampleInputFile">Gambar Thumbnail Berita</label>
-                      <div class="input-group">
-                        <div class="custom-file">
-                          <input type="file" class="custom-file-input" id="gambar" style="width: 100%;" onchange="loadFile(event)" accept="image/*" >
-                          <label class="custom-file-label" for="gambar">Choose file</label>
-                        </div>
-                      </div>
-                    </div>
-
                 </div>
 
               <div class="col-md-6">
-                  <label for="exampleInputEmail1"><h4>Detil Informasi Berita</h4></label>
+                  <label for="exampleInputEmail1"><h4>Detil Informasi <?php echo $surname?></h4></label>
+                  <div class="row">
+                      <div class="col-sm-6">
+                            <div class="form-group">
+                              <label for="exampleInputEmail1">Nomor Polisi</label>
+                              <input type="text" name="Nopol" class="form-control" id="Nopol" placeholder="Nomor Polisi" required style="width: 100%" >
+                            </div>
+                      </div>
+                      <div class="col-sm-6">
+                              <div class="form-group">
+                                <label for="exampleInputEmail1">Tanggal Beli Kendaraan</label>
+                                <input type="date" name="TglBeli" class="form-control" id="TglBeli" required style="width: 100%" >
+                              </div>
+                      </div>
+                  </div>
                 <div class="row">
                     <div class="col-sm-6">
-                      <div class="form-group">
-                            <label for="exampleInputEmail1">Tanggal Rilis</label>
-                            <input type="date" name="TglRilis" class="form-control" id="TglRilis" required style="width: 100%;" >
-                          </div>
                           <div class="form-group">
-                            <label for="exampleInputEmail1">Waktu rilis berita</label>
-                            <input type="text" name="Waktu" class="form-control" id="Waktu"
-                            placeholder="<?php
-                            date_default_timezone_set('Asia/Jakarta');
-                            $format = "%G:%i:%s";
-                            echo mdate($format); ?>" disabled style="width: 100%;" >
+                            <label for="exampleInputEmail1">Jumlah Kursi</label>
+                            <input type="number" name="Kursi" class="form-control" id="Kursi" required style="width: 100%" >
                           </div>
                     </div>
                     <div class="col-sm-6">
-                      <div class="form-group">
-                        <label for="exampleInputEmail1">Tanggal Kadaluarsa</label>
-                        <input type="date" name="TglKadaluarsa" class="form-control" id="TglKadaluarsa" required style="width: 100%;" >
-                      </div>
-                      <?php //tambahkan fungsi Author nanti ?>
-                      <div class="form-group">
-                        <label for="exampleInputEmail1">Status Berita</label></br>
-                        <input type="checkbox" name="status" value=0 data-bootstrap-switch style="width: 100%;">
-                      </div>
+                        <div class="form-group">
+                          <label for="exampleInputEmail1">Status <?php echo $surname?></label></br>
+                          <input type="checkbox" name="status" value=0 data-bootstrap-switch style="width: 100%">
+                        </div>
                     </div>
-                    <div class="col-sm-6">
-                      <label for="exampleInputEmail1">Bentuk Foto</label></br>
-                      <img id="output"/>
-                  </div>
                 </div>
                 </div>
             </div>
@@ -121,22 +103,24 @@
           <table id="memListTable" class="table table-bordered table-striped">
             <thead>
                 <tr>
-                    <th>No</th>
-                    <th>Judul Berita</th>
-                    <th>Tanggal Rilis</th>
-                    <th>Tanggal Kadaluarsa</th>
-                    <th>Waktu Rilis</th>
-                    <th>Status Berita</th>
-                  </tr>
+                  <th>No</th>
+                  <th>Nama / Merk Kendaraan</th>
+                  <th>Jenis Kendaraan</th>
+                  <th>Nomor Polisi</th>
+                  <th>Jumlah Kursi</th>
+                  <th>Tanggal Beli Kendaraan</th>
+                  <th>Status</th>
+                </tr>
             </thead>
             <tfoot>
                 <tr>
                   <th>No</th>
-                  <th>Judul Berita</th>
-                  <th>Tanggal Rilis</th>
-                  <th>Tanggal Kadaluarsa</th>
-                  <th>Waktu Rilis</th>
-                  <th>Status Berita</th>
+                  <th>Nama / Merk Kendaraan</th>
+                  <th>Jenis Kendaraan</th>
+                  <th>Nomor Polisi</th>
+                  <th>Jumlah Kursi</th>
+                  <th>Tanggal Beli Kendaraan</th>
+                  <th>Status</th>
                 </tr>
             </tfoot>
           </table>

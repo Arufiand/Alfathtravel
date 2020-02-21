@@ -1,29 +1,35 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Berita extends CI_Controller{
+class Kelola extends CI_Controller{
 
     function  __construct(){
         parent::__construct();
         $this->load->helper('url');
-        $this->load->model('m_berita');
-        $this->load->model('m_kategori');
         $this->load->helper('date');
         $this->load->library('form_validation');
         date_default_timezone_set('Asia/Jakarta');
+        $this->load->model('m_staff');
+        //$this->load->model('m_kategori');
 
     }
 
-    function index(){
+    function staff(){ //view staff
         // Load the member list view
-        $data['kategori'] = $this->m_berita->ambilDataKategori()->result();
-        $data['judul'] = "Kelola Berita";
-        $this->load->view('berita/index',$data);
-
+        //$data['kategori'] = $this->m_berita->ambilDataKategori()->result();
+        $data['judul'] = "Kelola Staff";
+        $data['surname'] = "Staff";
+        $this->load->view('kelola/staff',$data);
       }
+      function kendaraan(){ //view staff
+          // Load the member list view
+          //$data['kategori'] = $this->m_berita->ambilDataKategori()->result();
+          $data['judul'] = "Kelola Kendaraan";
+          $data['surname'] = "Kendaraan";
+          $this->load->view('kelola/kendaraan',$data);
+        }
 
-    function inputKonten()
-    {
+    function inputKonten(){
       //auto increment
       $this->form_validation->set_rules('judul','Judul Berita','required');
       $query= $this->db->query("SELECT MAX(IdBerita) as Max_ID from kontenberita");
@@ -77,50 +83,52 @@ class Berita extends CI_Controller{
           }
 
       }
-    function getListsBerita(){
+    function getListsStaff(){
+
         $data = $row = array();
-
         // Fetch member's records
-        $memData = $this->m_berita->getRows($_POST);
-
+        $staffData = $this->m_staff->getRows($_POST);
         $i = $_POST['start'];
-        foreach($memData as $member){
+        //$role = $this->m_staff->getNamaRole($i);
+        foreach($staffData as $member){
             $i++;
-            $tgl_rilis = date( 'j F Y', strtotime($member->TanggalRilis));
-            $tgl_kadaluarsa = date( 'j F Y', strtotime($member->TanggalKadaluarsa));
-            $status = ($member->StatusBerita == 1)?'Active':'Inactive';
-            $data[] = array(
-            $i,
-            $member->Judul,
-            $tgl_rilis,
-            $tgl_kadaluarsa,
-            $member->WaktuRilis,
-            $status
-          );
+            $TTL = $member->KotaLahirK." , ".date( 'j F Y', strtotime($member->TglLahirK));
+            $TempatTinggal = $member->AlamatK." , ".$member->KotaK." , ".$member->PropinsiK;
+            //$Role = $this->db->get('Table', limit, offset);
+            $status = ($member->StatusK == 1)?'Active':'Inactive';
+            $role = ($member->Id == 1)? 'Administrator' :'Author';
+            $data[] = array
+            (
+                    $i,
+                    $member->NamaK,
+                    $TempatTinggal,
+                    $TTL,
+                    $member->NoTelpK,
+                    $member->EmailK,
+                    $status,
+                    $role
+            );
         }
 
         $output = array(
             "draw" => $_POST['draw'],
-            "recordsTotal" => $this->m_berita->countAll(),
-            "recordsFiltered" => $this->m_berita->countFiltered($_POST),
+            "recordsTotal" => $this->m_staff->countAll(),
+            "recordsFiltered" => $this->m_staff->countFiltered($_POST),
             "data" => $data,
         );
 
         // Output to JSON format
         echo json_encode($output);
     }
-      function tambah()
-      {
+    function tambah(){
         $nama;
       }
 
     //Kategori berita
-
      function kategori(){
        $data['judul'] = "Kelola Kategori";
        $this->load->view('berita/kategoriBerita',$data);
      }
-
      function getListsKategori(){
          $data = $row = array();
 
@@ -148,9 +156,7 @@ class Berita extends CI_Controller{
          // Output to JSON format
          echo json_encode($output);
      }
-
-     function inputKategori()
-     {
+     function inputKategori(){
        //form_validation
        $this->form_validation->set_rules('kategori','Kategori','required');
        //auto increment

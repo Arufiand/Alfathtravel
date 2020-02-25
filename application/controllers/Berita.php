@@ -18,9 +18,15 @@ class Berita extends CI_Controller{
         // Load the member list view
         $data['kategori'] = $this->m_berita->ambilDataKategori()->result();
         $data['judul'] = "Kelola Berita";
+        $data['surname'] = "Berita";
         $this->load->view('berita/index',$data);
-
       }
+      //Kategori berita
+       function kategori(){
+         $data['judul'] = "Kelola Kategori";
+         $data['surname'] = "Kategori";
+         $this->load->view('berita/kategoriBerita',$data);
+       }
 
     function inputKonten()
     {
@@ -114,12 +120,7 @@ class Berita extends CI_Controller{
         $nama;
       }
 
-    //Kategori berita
 
-     function kategori(){
-       $data['judul'] = "Kelola Kategori";
-       $this->load->view('berita/kategoriBerita',$data);
-     }
 
      function getListsKategori(){
          $data = $row = array();

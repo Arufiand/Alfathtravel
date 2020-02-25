@@ -10,7 +10,7 @@ class Kelola extends CI_Controller{
         $this->load->library('form_validation');
         date_default_timezone_set('Asia/Jakarta');
         $this->load->model('m_staff');
-        //$this->load->model('m_kategori');
+        $this->load->model('m_pelanggan');
 
     }
 
@@ -28,30 +28,22 @@ class Kelola extends CI_Controller{
           $data['surname'] = "Kendaraan";
           $this->load->view('kelola/kendaraan',$data);
         }
+      function pelanggan(){ //view staff
+          // Load the member list view
+          //$data['kategori'] = $this->m_berita->ambilDataKategori()->result();
+          $data['judul'] = "Kelola Pelanggan";
+          $data['surname'] = "Pelanggan";
+          $this->load->view('kelola/pelanggan',$data);
+        }
 
-    function inputKonten(){
+      function inputKonten(){
       //auto increment
       $this->form_validation->set_rules('judul','Judul Berita','required');
       $query= $this->db->query("SELECT MAX(IdBerita) as Max_ID from kontenberita");
       $row = $query->row_array();
       $id = $row['Max_ID'];
       $ids = $id +1;
-      // //Config Gambar Upload
-      // $config['upload_path']          = './gambar/';
-  	  // $config['allowed_types']        = 'jpg|png';
-  		// $config['max_size']             = 200;
-  		// $config['max_width']            = 1280;
-  		// $config['max_height']           = 960;
-      //
-  		// $this->load->library('upload', $config);
-      //
-  		// if ( ! $this->upload->do_upload('gambar')){
-  		// 	$error = array('error' => $this->upload->display_errors());
-  		// 	$this->load->view('berita/index', $error);
-  		// }else{
-
-       if($this->form_validation->run() != false){
-
+      if($this->form_validation->run() != false){
               $judul= htmlentities($this->input->post('judul'), ENT_QUOTES, 'UTF-8');
               $kategori = $this->input->post('Kategori');
               $status = $this->input->post('status');
@@ -81,10 +73,10 @@ class Kelola extends CI_Controller{
               $this->m_berita->input_konten($data,'kontenberita');
               redirect ('index.php/berita');
           }
-
       }
-    function getListsStaff(){
 
+    function getListsStaff()
+    {
         $data = $row = array();
         // Fetch member's records
         $staffData = $this->m_staff->getRows($_POST);
@@ -120,43 +112,80 @@ class Kelola extends CI_Controller{
         // Output to JSON format
         echo json_encode($output);
     }
-    function tambah(){
-        $nama;
-      }
+    function getListsKendaraan()
+    {
+        $data = $row = array();
+        // Fetch member's records
+        $staffData = $this->m_staff->getRows($_POST);
+        $i = $_POST['start'];
+        //$role = $this->m_staff->getNamaRole($i);
+        foreach($staffData as $member){
+            $i++;
+            $TTL = $member->KotaLahirK." , ".date( 'j F Y', strtotime($member->TglLahirK));
+            $TempatTinggal = $member->AlamatK." , ".$member->KotaK." , ".$member->PropinsiK;
+            //$Role = $this->db->get('Table', limit, offset);
+            $status = ($member->StatusK == 1)?'Active':'Inactive';
+            $role = ($member->Id == 1)? 'Administrator' :'Author';
+            $data[] = array
+            (
+                    $i,
+                    $member->NamaK,
+                    $TempatTinggal,
+                    $TTL,
+                    $member->NoTelpK,
+                    $member->EmailK,
+                    $status,
+                    $role
+            );
+        }
 
-    //Kategori berita
-     function kategori(){
-       $data['judul'] = "Kelola Kategori";
-       $this->load->view('berita/kategoriBerita',$data);
-     }
-     function getListsKategori(){
-         $data = $row = array();
+        $output = array(
+            "draw" => $_POST['draw'],
+            "recordsTotal" => $this->m_staff->countAll(),
+            "recordsFiltered" => $this->m_staff->countFiltered($_POST),
+            "data" => $data,
+        );
 
-         // Fetch member's records
-         $memData = $this->m_kategori->getRows($_POST);
+        // Output to JSON format
+        echo json_encode($output);
+    }
+    function getListsPelanggan()
+    {
+        $data = $row = array();
+        // Fetch member's records
+        $pelangganData = $this->m_pelanggan->getRows($_POST);
+        $i = $_POST['start'];
+        //$role = $this->m_staff->getNamaRole($i);
+        foreach($pelangganData as $member){
+            $i++;
+            $TTL = $member->KotaLahirP." , ".date( 'j F Y', strtotime($member->TglLahirP));
+            $TempatTinggal = $member->AlamatP." , ".$member->KotaP." , ".$member->PropinsiP;
+            //$Role = $this->db->get('Table', limit, offset);
+            $status = ($member->StatusP == 1)?'Active':'Inactive';
+            $data[] = array
+            (
+                    $i,
+                    $member->NamaP,
+                    $TempatTinggal,
+                    $TTL,
+                    $member->NoTelpP,
+                    $member->EmailP,
+                    $status
+            );
+        }
 
-         $i = $_POST['start'];
-         foreach($memData as $member){
-             $i++;
-             $status = ($member->StatusKategori == 1)?'Active':'Inactive';
-             $data[] = array(
-             $i,
-             $member->NamaKategori,
-             $status
-             );
-         }
+        $output = array(
+            "draw" => $_POST['draw'],
+            "recordsTotal" => $this->m_pelanggan->countAll(),
+            "recordsFiltered" => $this->m_pelanggan->countFiltered($_POST),
+            "data" => $data,
+        );
 
-         $output = array(
-             "draw" => $_POST['draw'],
-             "recordsTotal" => $this->m_kategori->countAll(),
-             "recordsFiltered" => $this->m_kategori->countFiltered($_POST),
-             "data" => $data,
-         );
+        // Output to JSON format
+        echo json_encode($output);
+    }
 
-         // Output to JSON format
-         echo json_encode($output);
-     }
-     function inputKategori(){
+    function inputKategori(){
        //form_validation
        $this->form_validation->set_rules('kategori','Kategori','required');
        //auto increment

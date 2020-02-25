@@ -124,6 +124,7 @@
                   <th>Nomor Telepon</th>
                   <th>Email</th>
                   <th>Status</th>
+                  <th>Role</th>
                 </tr>
             </thead>
             <tfoot>
@@ -135,6 +136,7 @@
                   <th>Nomor Telepon</th>
                   <th>Email</th>
                   <th>Status</th>
+                  <th>Role</th>
                 </tr>
             </tfoot>
           </table>

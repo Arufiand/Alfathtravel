@@ -91,9 +91,9 @@
       <!--Tabel serverside datatable-->
       <div class="card card-primary">
         <div class="card-header">
-          <h3 class="card-title">Data Berita Website Alfath</h3>
+          <h3 class="card-title">Data <?php echo $surname?> Alfath</h3>
           <div class="card-tools">
-            <button type="button" class="btn btn-tool btn-sm" data-card-widget="collapse hide" data-toggle="tooltip"
+            <button type="button" class="btn btn-tool btn-sm" data-card-widget="collapse" data-toggle="tooltip"
                     title="Collapse">
               <i class="fas fa-minus"></i></button>
           </div>

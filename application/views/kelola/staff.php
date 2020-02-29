@@ -29,7 +29,7 @@
         </div>
         <!-- /.card-header -->
         <!-- form start -->
-        <form role="form" id="quickForm" action="<?php echo base_url(). 'index.php/berita/inputKonten'?>" method="post">
+        <form role="form" id="quickForm" action="<?php echo base_url(). 'index.php/kelola/inputStaff'?>" method="post">
           <div class="card-body">
             <div class="row">
 
@@ -41,7 +41,7 @@
                     </div>
                     <div class="form-group">
                       <label for="exampleInputEmail1">Alamat Rumah</label>
-                      <input type="email" name="Alamat" class="form-control" id="Alamat" placeholder="Alamat <?php echo $surname;?>" style="width: 100%" >
+                      <input type="text" name="Alamat" class="form-control" id="Alamat" placeholder="Alamat <?php echo $surname;?>" style="width: 100%" >
                     </div>
                     <div class="row">
                         <div class="col-sm-6">
@@ -60,39 +60,37 @@
                 </div>
 
               <div class="col-md-6">
-                  <label for="exampleInputEmail1"><h4>Detil Informasi <?php echo $surname?></h4></label>
-                <div class="row">
-                    <div class="col-sm-6">
-                          <div class="form-group">
-                            <label for="exampleInputEmail1">Tanggal Lahir</label>
-                            <input type="date" name="TglLahir" class="form-control" id="TglLahir" required style="width: 100%" >
-                          </div>
-                          <div class="form-group">
-                            <label for="exampleInputEmail1">Nomor Handphone</label>
-                            <input type="number" name="NoTelp" class="form-control" id="NoTelp" placeholder="Nomor Handphone" style="width: 100%" >
-                          </div>
+                    <label for="exampleInputEmail1"><h4>Detil Informasi <?php echo $surname?></h4></label>
+                  <div class="row">
+                      <div class="col-sm-6">
+                            <div class="form-group">
+                              <label for="exampleInputEmail1">Tanggal Lahir</label>
+                              <input type="date" name="TglLahir" class="form-control" id="TglLahir" required style="width: 100%" >
+                            </div>
+                            <div class="form-group">
+                              <label for="exampleInputEmail1">Nomor Handphone</label>
+                              <input type="number" name="NoTelp" class="form-control" id="NoTelp" placeholder="Nomor Handphone" style="width: 100%" >
+                            </div>
+                      </div>
+                      <div class="col-sm-6">
+                        <div class="form-group">
+                          <label for="exampleInputEmail1">Kota</label>
+                          <input type="text" name="KotaLahir" class="form-control" id="KotaLahir" placeholder="Kota Kelahiran" style="width: 100%" >
+                        </div>
+                        <div class="form-group">
+                          <label for="exampleInputEmail1">Alamat Email</label>
+                          <input type="email" name="Email" class="form-control" id="Email" placeholder="someone@abc.com" style="width: 100%" >
+                        </div>
+                      </div>
+                      <div class="col-sm-6">
+                        <div class="form-group">
+                          <label for="exampleInputEmail1">Status <?php echo $surname?></label></br>
+                          <input type="checkbox" name="status" value=1 checked data-bootstrap-switch style="width: 100%">
+                        </div>
                     </div>
-                    <div class="col-sm-6">
-                      <div class="form-group">
-                        <label for="exampleInputEmail1">Kota</label>
-                        <input type="text" name="KotaLahir" class="form-control" id="KotaLahir" placeholder="Kota Kelahiran" style="width: 100%" >
-                      </div>
-                      <div class="form-group">
-                        <label for="exampleInputEmail1">Alamat Email</label>
-                        <input type="email" name="Email" class="form-control" id="Email" placeholder="someone@abc.com" style="width: 100%" >
-                      </div>
-                    </div>
-                    <div class="col-sm-6">
-                      <div class="form-group">
-                        <label for="exampleInputEmail1">Status <?php echo $surname?></label></br>
-                        <input type="checkbox" name="status" value=1 checked data-bootstrap-switch style="width: 100%">
-                      </div>
                   </div>
                 </div>
-                </div>
             </div>
-
-
           </div>
           <!-- /.card-body -->
           <div class="card-footer">
@@ -169,36 +167,64 @@ $(document).ready(function () {
   });
   $('#quickForm').validate({
     rules: {
-      judul: {
+      Nama: {
         required: true,
-        judul: true,
+        Nama: true,
       },
-      Kategori: {
+      Alamat: {
         required: true,
-        Kategori: true,
+        Alamat: true,
       },
-      TglRilis: {
+      Kota: {
         required: true,
-        TglRilis: true,
+        Kota: true,
       },
-      TglKadaluarsa: {
+      Propinsi: {
         required: true,
-        TglKadaluarsa: true,
+        Propinsi: true,
+      },
+      TglLahir: {
+        required: true,
+        TglLahir: true,
+      },
+      NoTelp: {
+        required: true,
+        NoTelp: true,
+      },
+      KotaLahir: {
+        required: true,
+        KotaLahir: true,
+      },
+      email: {
+        required: true,
+        email: true,
       },
     },
     messages: {
-      judul: {
-        required: "Inputkan Judul Berita",
-      },
-      Kategori: {
-        required: "Pilih Salah Satu Kategori",
-      },
-      TglRilis: {
-        required: "Inputkan Tanggal Rilis Berita",
-      },
-      TglKadaluarsa: {
-        required: "Inputkan Tanggal Kadaluarsa Berita",
-      },
+            Nama: {
+              required: "Tolong Inputkan Nama",
+            },
+            Alamat: {
+              required: "Tolong Inputkan Alamat",
+            },
+            Kota: {
+            required: "Tolong Inputkan Kota",
+            },
+            Propinsi: {
+              required: "Tolong Inputkan Propinsi",
+            },
+            TglLahir: {
+              required: "Tolong Inputkan Tanggal Lahir",
+            },
+            NoTelp: {
+              required: "Tolong Inputkan Nomor Telepon",
+            },
+            KotaLahir: {
+              required: "Tolong Inputkan Kota Kelahiran",
+            },
+            email: {
+              required: "Tolong Inputkan Email",
+            }
     },
     errorElement: 'span',
     errorPlacement: function (error, element) {

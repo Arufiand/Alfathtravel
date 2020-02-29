@@ -32,7 +32,6 @@
         <form role="form" id="quickForm" action="<?php echo base_url(). 'index.php/berita/inputKonten'?>" method="post">
           <div class="card-body">
             <div class="row">
-
               <div class="col-sm-6">
                 <label for="exampleInputEmail1"><h4>Informasi Berita</h4></label>
                     <div class="form-group">

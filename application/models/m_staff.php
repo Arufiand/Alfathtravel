@@ -16,6 +16,9 @@ class M_staff extends CI_Model{
 
     }
 
+    function input_staff($data,$table){
+        $this->db->insert($table, $data);
+    }
     /*
      * Fetch members data from the database
      * @param $_POST filter data based on the posted parameters
@@ -95,11 +98,5 @@ class M_staff extends CI_Model{
             $this->db->order_by(key($order), $order[key($order)]);
         }
     }
-        function input_konten($data,$table){
-            $this->db->insert($table, $data);
-          }
-        function ambilDataKategori(){
-            $query = $this->db->get('kategori');
-            return $query;
-        }
+
 }

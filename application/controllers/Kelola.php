@@ -14,13 +14,12 @@ class Kelola extends CI_Controller{
 
     }
 
-    function staff(){ //view staff
-        // Load the member list view
-        //$data['kategori'] = $this->m_berita->ambilDataKategori()->result();
+      function staff(){ //view staff
         $data['judul'] = "Kelola Staff";
         $data['surname'] = "Staff";
         $this->load->view('kelola/staff',$data);
       }
+
       function kendaraan(){ //view staff
           // Load the member list view
           //$data['kategori'] = $this->m_berita->ambilDataKategori()->result();
@@ -28,6 +27,7 @@ class Kelola extends CI_Controller{
           $data['surname'] = "Kendaraan";
           $this->load->view('kelola/kendaraan',$data);
         }
+
       function pelanggan(){ //view staff
           // Load the member list view
           //$data['kategori'] = $this->m_berita->ambilDataKategori()->result();
@@ -36,47 +36,7 @@ class Kelola extends CI_Controller{
           $this->load->view('kelola/pelanggan',$data);
         }
 
-      function inputKonten(){
-      //auto increment
-      $this->form_validation->set_rules('judul','Judul Berita','required');
-      $query= $this->db->query("SELECT MAX(IdBerita) as Max_ID from kontenberita");
-      $row = $query->row_array();
-      $id = $row['Max_ID'];
-      $ids = $id +1;
-      if($this->form_validation->run() != false){
-              $judul= htmlentities($this->input->post('judul'), ENT_QUOTES, 'UTF-8');
-              $kategori = $this->input->post('Kategori');
-              $status = $this->input->post('status');
-              $isi = $this->input->post('isi');
-              $TglRilis = $this->input->post('TglRilis');
-              $TglKadaluarsa = $this->input->post('TglKadaluarsa');
-              //$gambarBerita = $this->input->post('gambarBerita');
-              $waktu = mdate("%H:%i");
-              $IdU = 2;
-
-              if ($status == 1){
-                $stat = 1;
-              } else{
-                $stat = 2;
-              }
-              $data = array (
-                'IdBerita' => $ids,
-                'Judul' => $judul,
-                'TanggalRilis' => $TglRilis,
-                'TanggalKadaluarsa' => $TglKadaluarsa,
-                'WaktuRilis' => $waktu,
-                'StatusBerita' => $stat,
-                'Gambar' => $gambar,
-
-              );
-              $this->session->set_flashdata('success', 'Berhasil disimpan');
-              $this->m_berita->input_konten($data,'kontenberita');
-              redirect ('index.php/berita');
-          }
-      }
-
-    function getListsStaff()
-    {
+      function getListsStaff(){
         $data = $row = array();
         // Fetch member's records
         $staffData = $this->m_staff->getRows($_POST);
@@ -112,8 +72,8 @@ class Kelola extends CI_Controller{
         // Output to JSON format
         echo json_encode($output);
     }
-    function getListsKendaraan()
-    {
+
+      function getListsKendaraan(){
         $data = $row = array();
         // Fetch member's records
         $staffData = $this->m_staff->getRows($_POST);
@@ -149,8 +109,8 @@ class Kelola extends CI_Controller{
         // Output to JSON format
         echo json_encode($output);
     }
-    function getListsPelanggan()
-    {
+
+      function getListsPelanggan(){
         $data = $row = array();
         // Fetch member's records
         $pelangganData = $this->m_pelanggan->getRows($_POST);
@@ -185,35 +145,60 @@ class Kelola extends CI_Controller{
         echo json_encode($output);
     }
 
-    function inputKategori(){
+      function inputStaff(){
        //form_validation
-       $this->form_validation->set_rules('kategori','Kategori','required');
+       $this->form_validation->set_rules('Nama','Nama Staff','required');
+       $this->form_validation->set_rules('Alamat','Alamat Tempat Tinggal','required');
+       $this->form_validation->set_rules('Kota','Kota Tempat Tinggal','required');
+       $this->form_validation->set_rules('Propinsi','Propinsi Tempat Tinggal','required');
+       $this->form_validation->set_rules('TglLahir','Tanggal Lahir Staff','required');
+       $this->form_validation->set_rules('KotaLahir','Kota Lahir Staff','required');
+       $this->form_validation->set_rules('Email','Email Staff','required');
        //auto increment
-       $query= $this->db->query("SELECT MAX(IdKategori) as Max_ID from kategori");
+       $query= $this->db->query("SELECT MAX(IdK) as Max_ID from karyawan");
        $row = $query->row_array();
        $id = $row['Max_ID'];
        $ids = $id +1;
        //auto increment end
        if($this->form_validation->run() != false){
-               $kategori = htmlentities($this->input->post('kategori'), ENT_QUOTES, 'UTF-8');
-               $status = $this->input->post('inputStatus');
-               if ($status == 1){
-                 $stat = 1;
-               } else{
-                 $stat = 2;
-               }
-               $data = array (
-                 'IdKategori' => $ids,
-                 'NamaKategori' => $kategori,
-                 'StatusKategori' => $stat
-               );
-               $this->session->set_flashdata('success', 'Berhasil disimpan');
-               $this->m_kategori->input_kategori($data,'kategori');
-               redirect ('index.php/berita/kategori');
-           }
-      }
+            $Nama= htmlentities ($this->input->post('Nama'), ENT_QUOTES, 'UTF-8');
+            $Alamat= htmlentities ($this->input->post('Alamat'), ENT_QUOTES, 'UTF-8');
+            $Kota= htmlentities ($this->input->post('Kota'), ENT_QUOTES, 'UTF-8');
+            $Propinsi= htmlentities ($this->input->post('Propinsi'), ENT_QUOTES, 'UTF-8');
+            $TglLahir = htmlentities ($this->input->post('TglLahir'), ENT_QUOTES, 'UTF-8');
+            $KotaLahir= htmlentities ($this->input->post('KotaLahir'), ENT_QUOTES, 'UTF-8');
+            $Email = htmlentities ($this->input->post('Email'), ENT_QUOTES, 'UTF-8');
+            $NoTelp = htmlentities ($this->input->post('NoTelp'), ENT_QUOTES, 'UTF-8');
+            $Id = 1;
+            $status = htmlentities ($this->input->post('status'), ENT_QUOTES, 'UTF-8');
 
+              if ($status == 1){
+                $stat = 1;
+              } else{
+                $stat = 2;
+              }
+              $data = array (
+                'IdK' => $ids,
+                'Id' => $Id,
+                'NamaK' => $Nama,
+                'AlamatK' => $Alamat,
+                'KotaK' => $Kota,
+                'PropinsiK' => $Propinsi,
+                'TglLahirK' => $TglLahir,
+                'KotaLahirK' => $KotaLahir,
+                'StatusK' => $stat,
+                'EmailK' => $Email,
+                'NoTelpK' => $NoTelp
 
-
+              );
+              $this->session->set_flashdata('success', 'Berhasil disimpan');
+              $this->m_staff->input_staff($data,'karyawan');
+              redirect ('index.php/kelola/staff');
+          } else
+          {
+            $this->session->set_flashdata('danger', 'Data Tidak Lengkap');
+            redirect ('index.php/kelola/staff');
+          }
+        }
 
      }

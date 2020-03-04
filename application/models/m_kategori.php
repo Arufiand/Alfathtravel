@@ -3,7 +3,7 @@ if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 class M_kategori extends CI_Model{
 
-    function __construct() {
+  function __construct() {
         // Set table name
         $this->table = 'kategori';
         // Set orderable column fields
@@ -18,7 +18,7 @@ class M_kategori extends CI_Model{
      * Fetch members data from the database
      * @param $_POST filter data based on the posted parameters
      */
-    public function getRows($postData){
+  public function getRows($postData){
         $this->_get_datatables_query($postData);
         if($postData['length'] != -1){
             $this->db->limit($postData['length'], $postData['start']);
@@ -30,7 +30,7 @@ class M_kategori extends CI_Model{
     /*
      * Count all records
      */
-    public function countAll(){
+  public function countAll(){
         $this->db->from($this->table);
         return $this->db->count_all_results();
     }
@@ -39,7 +39,7 @@ class M_kategori extends CI_Model{
      * Count records based on the filter params
      * @param $_POST filter data based on the posted parameters
      */
-    public function countFiltered($postData){
+  public function countFiltered($postData){
         $this->_get_datatables_query($postData);
         $query = $this->db->get();
         return $query->num_rows();
@@ -49,7 +49,7 @@ class M_kategori extends CI_Model{
      * Perform the SQL queries needed for an server-side processing requested
      * @param $_POST filter data based on the posted parameters
      */
-    private function _get_datatables_query($postData){
+  private function _get_datatables_query($postData){
 
         $this->db->from($this->table);
 
@@ -83,7 +83,11 @@ class M_kategori extends CI_Model{
             $this->db->order_by(key($order), $order[key($order)]);
         }
     }
-        function input_kategori($data,$table){
-          $this->db->insert($table, $data);
-        }
+  function input_kategori($data,$table){
+    $this->db->insert($table, $data);
+    }
+  function hapus_data($where,$table){
+	   $this->db->where($where);
+	    $this->db->delete($table);
+    }
 }

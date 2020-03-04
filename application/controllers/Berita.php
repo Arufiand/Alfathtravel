@@ -28,8 +28,7 @@ class Berita extends CI_Controller{
          $this->load->view('berita/kategoriBerita',$data);
        }
 
-    function inputKonten()
-    {
+    function inputKonten(){
       //auto increment
       $this->form_validation->set_rules('judul','Judul Berita','required');
       $query= $this->db->query("SELECT MAX(IdBerita) as Max_ID from kontenberita");
@@ -115,14 +114,7 @@ class Berita extends CI_Controller{
         // Output to JSON format
         echo json_encode($output);
     }
-      function tambah()
-      {
-        $nama;
-      }
-
-
-
-     function getListsKategori(){
+    function getListsKategori(){
          $data = $row = array();
 
          // Fetch member's records
@@ -135,7 +127,11 @@ class Berita extends CI_Controller{
              $data[] = array(
              $i,
              $member->NamaKategori,
-             $status
+             $status,
+             anchor('crud/edit/'.$member->IdKategori,'Edit')." || ".
+             anchor('index.php/Berita/hapusKategori/'.$member->IdKategori,'Hapus')
+             //"<a class='btn btn-primary btn-sm' href=".anchor('crud/hapus/'.$member->IdKategori,'Edit')."</a>
+             //<a class='btn btn-danger btn-sm' href=".anchor('Berita/hapusKategori'.$member->IdKategori,'Hapus')."</a>"
              );
          }
 
@@ -179,6 +175,11 @@ class Berita extends CI_Controller{
            }
       }
 
+    function hapusKategori($id){
+		$where = array('IdKategori' => $id);
+		$this->m_kategori->hapus_data($where,'kategori');
+		redirect('index.php/berita/kategori');
+	}
 
 
 

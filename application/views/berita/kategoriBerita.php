@@ -74,6 +74,7 @@
                     <th>No</th>
                     <th>Nama Kategori</th>
                     <th>Status Kategori</th>
+                    <th>Aksi</th>
                   </tr>
               </thead>
               <tfoot>
@@ -81,6 +82,7 @@
                     <th>No</th>
                     <th>Nama Kategori</th>
                     <th>Status Kategori</th>
+                    <th>Aksi</th>
                   </tr>
               </tfoot>
             </table>

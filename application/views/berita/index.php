@@ -40,8 +40,8 @@
                     </div>
                     <div class="form-group">
                       <label for="exampleInputEmail1">Kategori</label>
-                      <select class="form-control" name="Kategori" id="Kategori" required style="width: 100%;" >
-                           <option value="">No Selected</option>
+                      <select class="form-control select2bs4" name="Kategori" id="Kategori" required style="width: 100%;" >
+                           <option value=""selected="selected">No Selected</option>
                            <?php foreach($kategori as $row):?>
                            <option value="<?php echo $row->IdKategori;?>"><?php echo $row->NamaKategori;?></option>
                            <?php endforeach;?>
@@ -61,12 +61,13 @@
 
               <div class="col-md-6">
                   <label for="exampleInputEmail1"><h4>Detil Informasi Berita</h4></label>
+                  <div class="form-group">
+                    <label for="exampleInputEmail1">Tanggal Rilis</label>
+                    <!-- //TODO: Convert date to string, potong dan jadikan 2 variabel, rubah kembali ke bentuk date dan simpan ke db -->
+                    <input type="text" name="TglRilis" class="form-control" id="TglRilis" required style="width: 100%;" >
+                  </div>
                 <div class="row">
                     <div class="col-sm-6">
-                      <div class="form-group">
-                            <label for="exampleInputEmail1">Tanggal Rilis</label>
-                            <input type="date" name="TglRilis" class="form-control" id="TglRilis" required style="width: 100%;" >
-                          </div>
                           <div class="form-group">
                             <label for="exampleInputEmail1">Waktu rilis berita</label>
                             <input type="text" name="Waktu" class="form-control" id="Waktu"
@@ -77,11 +78,7 @@
                           </div>
                     </div>
                     <div class="col-sm-6">
-                      <div class="form-group">
-                        <label for="exampleInputEmail1">Tanggal Kadaluarsa</label>
-                        <input type="date" name="TglKadaluarsa" class="form-control" id="TglKadaluarsa" required style="width: 100%;" >
-                      </div>
-                      <?php //tambahkan fungsi Author nanti ?>
+                      <!-- //TODO: //tambahkan fungsi Author nanti -->
                       <div class="form-group">
                         <label for="exampleInputEmail1">Status Berita</label></br>
                         <input type="checkbox" name="status" value=0 data-bootstrap-switch style="width: 100%;">
@@ -162,6 +159,11 @@
 <?php $this->load->view('view/js');?>
 <!-- jQuery -->
 <script type="text/javascript">
+
+
+//Date range picker
+$('#TglRilis').daterangepicker()
+
 $(document).ready(function () {
   $.validator.setDefaults({
     submitHandler: function () {

@@ -5,7 +5,6 @@
     <label class="custom-file-label" for="gambarBerita">Choose file</label>
   </div>
 </div>
-
 <div class="card card-outline card-info">
   <div class="card-header">
     <h3 class="card-title">

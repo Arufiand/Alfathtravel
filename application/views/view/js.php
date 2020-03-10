@@ -1,4 +1,4 @@
-<script src="<?php echo base_url()?>assets/datatable/jQuery/jquery.min.js"></script>
+<script src="<?php echo base_url()?>assets/datatable/jQuery/jquery-3.3.1.min.js"></script>
 
 <!-- <script>
   $.widget.bridge('uibutton', $.ui.button)
@@ -27,21 +27,33 @@
 <!-- AdminLTE App -->
 <script src="<?php echo base_url()?>assets/dist/js/adminlte.js"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-<script src="<?php echo base_url()?>assets/dist/js/pages/dashboard.js"></script>
+<!--<script src="<?php //echo base_url()?>assets/dist/js/pages/dashboard.js"></script>-->
 <!-- AdminLTE for demo purposes -->
 <script src="<?php echo base_url()?>assets/dist/js/demo.js"></script>
 <!-- DataTables -->
 <script src="<?php echo base_url()?>assets/plugins/datatables/jquery.dataTables.js"></script>
 <script src="<?php echo base_url()?>assets/plugins/datatables-bs4/js/dataTables.bootstrap4.js"></script>
+<script src="<?php echo base_url()?>assets/datatable/responsive/responsive.js"></script>
 <!-- jquery-validation -->
 <script src="<?php echo base_url()?>assets/plugins/jquery-validation/jquery.validate.min.js"></script>
 <script src="<?php echo base_url()?>assets/plugins/jquery-validation/additional-methods.min.js"></script>
 <!-- bootstrap switch -->
 <script src="<?php echo base_url()?>assets/plugins/bootstrap-switch/js/bootstrap-switch.min.js"></script>
-<script src="<?php echo base_url()?>assets/datatable/responsive/responsive.js"></script>
+<!-- Select2 -->
+<script src="<?php echo base_url()?>assets/plugins/select2/js/select2.full.min.js"></script>
+<!-- date-range-picker -->
+<script src="<?php echo base_url()?>assets/plugins/daterangepicker/daterangepicker.js"></script>
+
+
 <script>
+//checked State B4
 $("input[data-bootstrap-switch]").each(function(){
   $(this).bootstrapSwitch('state', $(this).prop('checked'));
+});
+
+//select2bs4
+$('.select2bs4').select2({
+  theme: 'bootstrap4'
 });
 </script>
 

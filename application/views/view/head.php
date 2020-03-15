@@ -35,3 +35,5 @@
 <link rel="stylesheet" href="<?php echo base_url()?>assets/plugins/datatables-bs4/css/dataTables.bootstrap4.css">
 <link rel="stylesheet" href="<?php echo base_url()?>assets/datatable/responsive/responsiveDataTables.css">
 <link rel="stylesheet" href="<?php echo base_url()?>assets/dist/css/img.css">
+<!-- SweetAlert2 -->
+<link rel="stylesheet" href="<?php echo base_url()?>assets/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">

@@ -13,7 +13,6 @@ class Berita extends CI_Controller{
         date_default_timezone_set('Asia/Jakarta');
 
     }
-
     function index(){
         // Load the member list view
         $data['kategori'] = $this->m_berita->ambilDataKategori()->result();
@@ -27,7 +26,6 @@ class Berita extends CI_Controller{
          $data['surname'] = "Kategori";
          $this->load->view('berita/kategoriBerita',$data);
        }
-
     function inputKonten(){
       //auto increment
       $this->form_validation->set_rules('judul','Judul Berita','required');
@@ -55,25 +53,37 @@ class Berita extends CI_Controller{
               $kategori = $this->input->post('Kategori');
               $status = $this->input->post('status');
               $isi = $this->input->post('isi');
-              $TglRilis = $this->input->post('TglRilis');
-              $TglKadaluarsa = $this->input->post('TglKadaluarsa');
+              $Tanggal = $this->input->post('TglRilis');
+
+
               //$gambarBerita = $this->input->post('gambarBerita');
               $waktu = mdate("%H:%i");
+
+              //// TODO: IdU nanti rubah untuk ambil ID Login
               $IdU = 2;
+              // pecah string dan rubah ke bentuk date
+              $Pecah = explode( "-", $Tanggal );
+              $dateA = strtotime($Pecah[0]);
+              $dateK = strtotime($Pecah[1]);
+              $TglRilis = date ('yy-m-d',$dateA);
+              $TglKadaluarsa = date ('yy-m-d',$dateK);
 
               if ($status == 1){
                 $stat = 1;
               } else{
                 $stat = 2;
               }
+
               $data = array (
                 'IdBerita' => $ids,
                 'Judul' => $judul,
+                'IdKategori' => $kategori,
+                'Id' => $IdU,
                 'TanggalRilis' => $TglRilis,
                 'TanggalKadaluarsa' => $TglKadaluarsa,
                 'WaktuRilis' => $waktu,
-                'StatusBerita' => $stat,
-                'Gambar' => $gambar,
+                'StatusBerita' => $stat
+                //'Gambar' => $gambar
 
               );
               $this->session->set_flashdata('success', 'Berhasil disimpan');
@@ -116,10 +126,8 @@ class Berita extends CI_Controller{
     }
     function getListsKategori(){
          $data = $row = array();
-
          // Fetch member's records
          $memData = $this->m_kategori->getRows($_POST);
-
          $i = $_POST['start'];
          foreach($memData as $member){
              $i++;
@@ -134,18 +142,15 @@ class Berita extends CI_Controller{
              //<a class='btn btn-danger btn-sm' href=".anchor('Berita/hapusKategori'.$member->IdKategori,'Hapus')."</a>"
              );
          }
-
          $output = array(
              "draw" => $_POST['draw'],
              "recordsTotal" => $this->m_kategori->countAll(),
              "recordsFiltered" => $this->m_kategori->countFiltered($_POST),
              "data" => $data,
          );
-
          // Output to JSON format
          echo json_encode($output);
      }
-
      function inputKategori()
      {
        //form_validation
@@ -174,13 +179,10 @@ class Berita extends CI_Controller{
                redirect ('index.php/berita/kategori');
            }
       }
-
     function hapusKategori($id){
 		$where = array('IdKategori' => $id);
 		$this->m_kategori->hapus_data($where,'kategori');
 		redirect('index.php/berita/kategori');
 	}
 
-
-
-     }
+}

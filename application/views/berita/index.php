@@ -30,7 +30,7 @@
         <!-- /.card-header -->
         <!-- form start -->
         <form role="form" id="quickForm" action="<?php echo base_url(). 'index.php/berita/inputKonten'?>" method="post">
-          <div class="card-body">
+          <div class="card-body pad">
             <div class="row">
               <div class="col-sm-6">
                 <label for="exampleInputEmail1"><h4>Informasi Berita</h4></label>
@@ -48,7 +48,7 @@
                        </select>
                     </div>
                     <div class="form-group">
-                      <label for="exampleInputFile">Gambar Thumbnail Berita</label>
+                      <label for="exampleInputFile">Gambar Thumbnail Berita</label><small> *Ekstensi .png & .jpg</small>
                       <div class="input-group">
                         <div class="custom-file">
                           <input type="file" class="custom-file-input" id="gambar" style="width: 100%;" onchange="loadFile(event)" accept="image/*" >
@@ -56,9 +56,7 @@
                         </div>
                       </div>
                     </div>
-
                 </div>
-
               <div class="col-md-6">
                   <label for="exampleInputEmail1"><h4>Detil Informasi Berita</h4></label>
                   <div class="form-group">
@@ -66,7 +64,7 @@
                     <!-- //TODO: Convert date to string, potong dan jadikan 2 variabel, rubah kembali ke bentuk date dan simpan ke db -->
                     <input type="text" name="TglRilis" class="form-control" id="TglRilis" required style="width: 100%;" >
                   </div>
-                <div class="row">
+                  <div class="row">
                     <div class="col-sm-6">
                           <div class="form-group">
                             <label for="exampleInputEmail1">Waktu rilis berita</label>
@@ -90,13 +88,22 @@
                   </div>
                 </div>
                 </div>
+              <div class="col-md-12">
+                <label for="exampleInputEmail1"><h4>Detil Informasi Berita</h4></label>
+                <!-- <div class="card-body pad"> -->
+                  <div class="mb-6">
+                    <textarea class="textarea" placeholder="Place some text here"
+                              style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>
+                  </div>
+                <!-- </div> -->
+              </div>
             </div>
 
 
           </div>
           <!-- /.card-body -->
           <div class="card-footer">
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="submit" class="btn btn-primary swalDefaultSuccess">Submit</button>
           </div>
         </form>
       </div>
@@ -159,69 +166,59 @@
 <?php $this->load->view('view/js');?>
 <!-- jQuery -->
 <script type="text/javascript">
+    //Date range picker
+    $('#TglRilis').daterangepicker()
 
+    $(document).ready(function () {
+    $.validator.setDefaults({
+      submitHandler: function () {
+        alert( "Form successful submitted!" );
+      }
+    });
+    $('#quickForm').validate({
+      rules: {
+        judul: {
+          required: true,
+          judul: true,
+        },
+        Kategori: {
+          required: true,
+          Kategori: true,
+        },
+        TglKadaluarsa: {
+          required: true,
+          TglKadaluarsa: true,
+        },
+      },
+      messages: {
+        judul: {
+          required: "Inputkan Judul Berita",
+        },
+        Kategori: {
+          required: "Pilih Salah Satu Kategori",
+        },
+        TglKadaluarsa: {
+          required: "Inputkan Tanggal Kadaluarsa Berita",
+        },
+      },
+      errorElement: 'span',
+      errorPlacement: function (error, element) {
+        error.addClass('invalid-feedback');
+        element.closest('.form-group').append(error);
+      },
+      highlight: function (element, errorClass, validClass) {
+        $(element).addClass('is-invalid');
+      },
+      unhighlight: function (element, errorClass, validClass) {
+        $(element).removeClass('is-invalid');
+      }
+    });
+    });
 
-//Date range picker
-$('#TglRilis').daterangepicker()
-
-$(document).ready(function () {
-  $.validator.setDefaults({
-    submitHandler: function () {
-      alert( "Form successful submitted!" );
-    }
-  });
-  $('#quickForm').validate({
-    rules: {
-      judul: {
-        required: true,
-        judul: true,
-      },
-      Kategori: {
-        required: true,
-        Kategori: true,
-      },
-      TglRilis: {
-        required: true,
-        TglRilis: true,
-      },
-      TglKadaluarsa: {
-        required: true,
-        TglKadaluarsa: true,
-      },
-    },
-    messages: {
-      judul: {
-        required: "Inputkan Judul Berita",
-      },
-      Kategori: {
-        required: "Pilih Salah Satu Kategori",
-      },
-      TglRilis: {
-        required: "Inputkan Tanggal Rilis Berita",
-      },
-      TglKadaluarsa: {
-        required: "Inputkan Tanggal Kadaluarsa Berita",
-      },
-    },
-    errorElement: 'span',
-    errorPlacement: function (error, element) {
-      error.addClass('invalid-feedback');
-      element.closest('.form-group').append(error);
-    },
-    highlight: function (element, errorClass, validClass) {
-      $(element).addClass('is-invalid');
-    },
-    unhighlight: function (element, errorClass, validClass) {
-      $(element).removeClass('is-invalid');
-    }
-  });
-});
-</script>
-<script>
-  var loadFile = function(event) {
-    var output = document.getElementById('output');
-    output.src = URL.createObjectURL(event.target.files[0]);
-  };
+    var loadFile = function(event) {
+      var output = document.getElementById('output');
+      output.src = URL.createObjectURL(event.target.files[0]);
+    };
 </script>
 </body>
 </html>

@@ -4,7 +4,6 @@ if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 class M_staff extends CI_Model{
 
     function __construct() {
-
         // Set table name
         $this->table = 'karyawan';
         // Set orderable column fields
@@ -13,11 +12,6 @@ class M_staff extends CI_Model{
         $this->column_search = array('NamaK','AlamatK','TglLahirK','NoTelpK','EmailK','StatusK','Id');
         // Set default order
         $this->order = array('IdK' => 'asc');
-
-    }
-
-    function input_staff($data,$table){
-        $this->db->insert($table, $data);
     }
     /*
      * Fetch members data from the database
@@ -32,8 +26,6 @@ class M_staff extends CI_Model{
       echo $row->NamaRole;
     }
     public function getRows($postData){
-
-
         $this->_get_datatables_query($postData);
         if($postData['length'] != -1){
             $this->db->limit($postData['length'], $postData['start']);
@@ -41,7 +33,6 @@ class M_staff extends CI_Model{
         $query = $this->db->get();
         return $query->result();
     }
-
     /*
      * Count all records
      */
@@ -49,7 +40,6 @@ class M_staff extends CI_Model{
         $this->db->from($this->table);
         return $this->db->count_all_results();
     }
-
     /*
      * Count records based on the filter params
      * @param $_POST filter data based on the posted parameters
@@ -59,15 +49,12 @@ class M_staff extends CI_Model{
         $query = $this->db->get();
         return $query->num_rows();
     }
-
     /*
      * Perform the SQL queries needed for an server-sIde processing requested
      * @param $_POST filter data based on the posted parameters
      */
     private function _get_datatables_query($postData){
-
         $this->db->from($this->table);
-
         $i = 0;
         // loop searchable columns
         foreach($this->column_search as $item){

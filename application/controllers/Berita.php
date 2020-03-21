@@ -8,6 +8,7 @@ class Berita extends CI_Controller{
         $this->load->helper('url');
         $this->load->model('m_berita');
         $this->load->model('m_kategori');
+        $this->load->model('m_crud');
         $this->load->helper('date');
         $this->load->library('form_validation');
         date_default_timezone_set('Asia/Jakarta');
@@ -87,7 +88,7 @@ class Berita extends CI_Controller{
 
               );
               $this->session->set_flashdata('success', 'Berhasil disimpan');
-              $this->m_berita->input_konten($data,'kontenberita');
+              $this->m_crud->input_data($data,'kontenberita');
               redirect ('index.php/berita');
           }
 
@@ -137,7 +138,7 @@ class Berita extends CI_Controller{
              $member->NamaKategori,
              $status,
              anchor('crud/edit/'.$member->IdKategori,'Edit')." || ".
-             anchor('index.php/Berita/hapusKategori/'.$member->IdKategori,'Hapus')
+             anchor('index.php/Berita/delete_kategori/'.$member->IdKategori,'Hapus')
              //"<a class='btn btn-primary btn-sm' href=".anchor('crud/hapus/'.$member->IdKategori,'Edit')."</a>
              //<a class='btn btn-danger btn-sm' href=".anchor('Berita/hapusKategori'.$member->IdKategori,'Hapus')."</a>"
              );
@@ -175,14 +176,13 @@ class Berita extends CI_Controller{
                  'StatusKategori' => $stat
                );
                $this->session->set_flashdata('success', 'Berhasil disimpan');
-               $this->m_kategori->input_kategori($data,'kategori');
+               $this->m_crud->input_data($data,'kategori');
                redirect ('index.php/berita/kategori');
            }
       }
-    function hapusKategori($id){
-		$where = array('IdKategori' => $id);
-		$this->m_kategori->hapus_data($where,'kategori');
-		redirect('index.php/berita/kategori');
-	}
-
+    function delete_kategori($id){
+		    $where = array('IdKategori' => $id);
+		    $this->m_crud->delete_data($where,'kategori');
+		    redirect('index.php/berita/kategori');
+	     }
 }

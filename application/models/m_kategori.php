@@ -83,11 +83,4 @@ class M_kategori extends CI_Model{
             $this->db->order_by(key($order), $order[key($order)]);
         }
     }
-  function input_kategori($data,$table){
-    $this->db->insert($table, $data);
-    }
-  function hapus_data($where,$table){
-	   $this->db->where($where);
-	    $this->db->delete($table);
-    }
 }

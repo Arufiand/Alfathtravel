@@ -22,15 +22,15 @@ class M_pelanggan extends CI_Model{
      */
 
     public function getNamaRole($i){
-      $query = $this->db->query('SELECT * FROM karyawan as K INNER join User as U on K.Id = U.Id
+      $query = $this->db->query('SELECT * FROM pelanggan as P
+        INNER join User as U on P.Id = U.Id
         inner join roleuser as R on U.IdRole = R.IdRole
-        where K.IdK ='.$i);
+        where P.IdP ='.$i);
       $row = $query->row();
       echo $row->NamaRole;
     }
+    
     public function getRows($postData){
-
-
         $this->_get_datatables_query($postData);
         if($postData['length'] != -1){
             $this->db->limit($postData['length'], $postData['start']);

@@ -46,15 +46,22 @@
                     <div class="row">
                         <div class="col-sm-6">
                               <div class="form-group">
-                                <label for="exampleInputEmail1">Kota</label>
-                                <input type="text" name="Kota" class="form-control" id="Kota" placeholder="Pilih Dibawah" required style="width: 100%" >
+                                <label for="exampleInputEmail1">Provinsi</label>
+                                <select class="form-control select2bs4" style="width: 100%;" name="provinsi" id="provinsi">
+                                  <option value="0" selected>-PILIH-</option>
+          	                    	<?php foreach($provinsi->result() as $row):?>
+          	                    		<option value="<?php echo $row->id_prov;?>"><?php echo $row->nama;?></option>
+          	                    	<?php endforeach;?>
+                                </select>
                               </div>
                         </div>
                         <div class="col-sm-6">
-                          <div class="form-group">
-                            <label for="exampleInputEmail1">Propinsi</label>
-                            <input type="text" name="Propinsi" class="form-control" id="Propinsi" placeholder="Pilih Dibawah" style="width: 100%" >
-                          </div>
+                              <div class="form-group">
+                                <label for="exampleInputEmail1">Kota</label>
+                                <select class="subprovinsi form-control select2bs4" style="width: 100%;" name="subprovinsi">
+                                    <option value="0">-PILIH-</option>
+                                </select>
+                              </div>
                         </div>
                     </div>
                 </div>
@@ -74,8 +81,13 @@
                       </div>
                       <div class="col-sm-6">
                         <div class="form-group">
-                          <label for="exampleInputEmail1">Kota</label>
-                          <input type="text" name="KotaLahir" class="form-control" id="KotaLahir" placeholder="Kota Kelahiran" style="width: 100%" >
+                          <label for="exampleInputEmail1">Kota Kelahiran</label>
+                          <select class="form-control select2bs4" style="width: 100%;" name="kotaKelahiran" id="kotaKelahiran">
+                              <option value="0" selected>-PILIH-</option>
+                                <?php foreach($kotaKelahiran->result() as $row):?>
+                                  <option value="<?php echo $row->id_prov;?>"><?php echo $row->nama;?></option>
+                              <?php endforeach;?>
+                          </select>
                         </div>
                         <div class="form-group">
                           <label for="exampleInputEmail1">Alamat Email</label>
@@ -159,6 +171,7 @@
 <?php $this->load->view('view/js');?>
 <!-- jQuery -->
 <script type="text/javascript">
+
 $(document).ready(function () {
   $.validator.setDefaults({
     submitHandler: function () {

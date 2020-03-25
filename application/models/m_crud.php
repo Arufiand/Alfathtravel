@@ -39,4 +39,32 @@ class M_crud extends CI_Model{
       }
     }
     //// TODO: https://codeigniter.com/user_guide/database/transactions.html baca bagian strict Mode
+
+    //ambil data tabel jenis, provinsi dan kabupaten untuk select kota dan provinsi
+    function get_jenis(){
+      $jenis = $this->db->query("SELECT * FROM jenis");
+      return $jenis;
+    }
+
+    function get_provinsi(){
+      $hasil = $this->db->query("SELECT * FROM provinsi");
+      return $hasil;
+    }
+
+    function get_kota(){
+      $hasil = $this->db->query("SELECT * FROM kabupaten");
+      return $hasil;
+    }
+
+    function get_kotaJatim(){
+      $hasil = $this->db->query("SELECT id_kab,kabupaten.nama FROM kabupaten LEFT JOIN provinsi on kabupaten.id_prov = provinsi.id_prov where provinsi.nama = 'JAWA TIMUR'");
+      return $hasil;
+    }
+
+    function get_subprovinsi($id){
+
+  		$hasil=$this->db->query("SELECT * FROM kabupaten WHERE id_prov='$id'");
+  		return $hasil->result();
+  	}
+
 }

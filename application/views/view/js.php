@@ -70,6 +70,10 @@ if ($judul == "Kelola Kategori")
 {
   $direktori="index.php/kelola/getListsStaff/";
 }
+ else if ($judul == "Kelola Pelanggan")
+{
+  $direktori="index.php/kelola/getListsPelanggan/";
+}
 ?>
 <script>
 $(document).ready(function(){
@@ -117,6 +121,33 @@ $(function() {
     });
 });
 
+//select2 provinsi dan kabupaten
+$(document).ready(function(){
+  $('#provinsi').change(function(){
+    var id=$(this).val();
+    $.ajax({
+      url : "<?php echo base_url();?>index.php/kelola/get_subprovinsi",
+      method : "POST",
+      data : {id: id},
+      async : false,
+          dataType : 'json',
+      success: function(data){
+        var html = '';
+              var i;
+              for(i=0; i<data.length; i++){
+                  html += '<option>'+data[i].nama+'</option>';
+              }
+              $('.subprovinsi').html(html);
+
+      }
+    });
+  });
+});
+
+
+
 // Summernote
-$('.textarea').summernote()
+$('.textarea').summernote();
+
+
 </script>

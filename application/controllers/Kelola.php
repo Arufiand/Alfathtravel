@@ -15,33 +15,44 @@ class Kelola extends CI_Controller{
 
     }
     function staff(){ //view staff
+      $data['provinsi'] = $this->m_crud->get_provinsi();
+      $data['kotaKelahiran'] = $this->m_crud->get_kota();
+
       $data['judul'] = "Kelola Staff";
       $data['surname'] = "Staff";
       $this->load->view('kelola/staff',$data);
     }
+
     function kendaraan(){ //view staff
         // Load the member list view
-        //$data['kategori'] = $this->m_berita->ambilDataKategori()->result();
+
         $data['judul'] = "Kelola Kendaraan";
         $data['surname'] = "Kendaraan";
         $this->load->view('kelola/kendaraan',$data);
       }
     function pelanggan(){ //view staff
-        // Load the member list view
-        //$data['kategori'] = $this->m_berita->ambilDataKategori()->result();
+        $data['provinsi'] = $this->m_crud->get_provinsi();
+        $data['kotaKelahiran'] = $this->m_crud->get_kota();
+
+        $data['data'] = $this->m_crud->get_provinsi();
         $data['judul'] = "Kelola Pelanggan";
         $data['surname'] = "Pelanggan";
         $this->load->view('kelola/pelanggan',$data);
       }
 
-    function trayek(){ //view staff
-        // Load the member list view
-        //$data['kategori'] = $this->m_berita->ambilDataKategori()->result();
+    function trayek(){
+        $data['provinsiJatim'] = $this->m_crud->get_kotaJatim();
+
         $data['judul'] = "Kelola Trayek";
         $data['surname'] = "Trayek";
         $this->load->view('kelola/trayek',$data);
       }
 
+      function get_subprovinsi(){
+        $id=$this->input->post('id');
+        $data=$this->m_crud->get_subprovinsi($id);
+        echo json_encode($data);
+      }
 
     function getListsStaff(){
       $data = $row = array();
@@ -150,6 +161,7 @@ class Kelola extends CI_Controller{
       echo json_encode($output);
     }
     function inputStaff(){
+
        //form_validation
        $this->form_validation->set_rules('Nama','Nama Staff','required');
        $this->form_validation->set_rules('Alamat','Alamat Tempat Tinggal','required');
@@ -252,5 +264,4 @@ class Kelola extends CI_Controller{
                    //redirect ('index.php/berita/kategori');
                //}
           }
-
   }

@@ -152,8 +152,8 @@ class Berita extends CI_Controller{
          // Output to JSON format
          echo json_encode($output);
      }
-     function inputKategori()
-     {
+
+     function inputKategori(){
        //form_validation
        $this->form_validation->set_rules('kategori','Kategori','required');
        //auto increment
@@ -180,9 +180,12 @@ class Berita extends CI_Controller{
                redirect ('index.php/berita/kategori');
            }
       }
+
     function delete_kategori($id){
 		    $where = array('IdKategori' => $id);
 		    $this->m_crud->delete_data($where,'kategori');
 		    redirect('index.php/berita/kategori');
 	     }
+
+    
 }

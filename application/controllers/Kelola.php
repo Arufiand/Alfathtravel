@@ -33,6 +33,16 @@ class Kelola extends CI_Controller{
         $data['surname'] = "Pelanggan";
         $this->load->view('kelola/pelanggan',$data);
       }
+
+    function trayek(){ //view staff
+        // Load the member list view
+        //$data['kategori'] = $this->m_berita->ambilDataKategori()->result();
+        $data['judul'] = "Kelola Trayek";
+        $data['surname'] = "Trayek";
+        $this->load->view('kelola/trayek',$data);
+      }
+
+
     function getListsStaff(){
       $data = $row = array();
       // Fetch member's records
@@ -194,4 +204,53 @@ class Kelola extends CI_Controller{
             redirect ('index.php/kelola/staff');
           }
       }
-     }
+
+      function inputTrayek()
+         {
+           //form_validation
+           // $this->form_validation->set_rules('kategori','Kategori','required');
+           //auto increment
+           // $query= $this->db->query("SELECT MAX(IdKategori) as Max_ID from kategori");
+           // $row = $query->row_array();
+           // $id = $row['Max_ID'];
+           // $ids = $id +1;
+           //auto increment end
+
+           //if($this->form_validation->run() != false){
+                  // $kategori = htmlentities($this->input->post('kategori'), ENT_QUOTES, 'UTF-8');
+                   $tujuanAwal = $this->input->post('tujuanAwal');
+                   $tujuanAkhir = $this->input->post('tujuanAkhir');
+                   $jadwal = $this->input->post('jadwalKeberangkatan');
+                   $kotaPemberhentian = $this->input->post('kotaPemberhentian');
+                   // $data = array();
+                   // $index = 0;
+                   //
+                   // foreach ($kotaPemberhentian as $dataKotaPem) {
+                   //   array_push ($data, array(
+                   //     'kotaPemberhentian'=> $kotaPemberhentian[$index]
+                   //   ));
+                   //   $index++;
+                   // }
+                   echo "Tujuan Awal :".$tujuanAwal."</br>";
+                   echo "Tujuan Akhir :".$tujuanAwal."</br>";
+                   echo "jadwal :".$jadwal."</br>";
+                   echo "kota Pemberhentian :".$kotaPemberhentian."</br>";
+
+
+                   // if ($status == 1){
+                   //   $stat = 1;
+                   // } else{
+                   //   $stat = 2;
+                   // }
+                   // $data = array (
+                   //   'IdKategori' => $ids,
+                   //   'NamaKategori' => $kategori,
+                   //   'StatusKategori' => $stat
+                   // );
+                   //$this->session->set_flashdata('success', 'Berhasil disimpan');
+                   // $this->m_crud->input_data($data,'kategori');
+                   //redirect ('index.php/berita/kategori');
+               //}
+          }
+
+  }

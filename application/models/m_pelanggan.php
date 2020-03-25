@@ -95,11 +95,8 @@ class M_pelanggan extends CI_Model{
             $this->db->order_by(key($order), $order[key($order)]);
         }
     }
-        function input_konten($data,$table){
-            $this->db->insert($table, $data);
-          }
-        function ambilDataKategori(){
-            $query = $this->db->get('kategori');
-            return $query;
-        }
+    function ambilDataKategori(){
+        $query = $this->db->get('kategori');
+        return $query;
+    }
 }

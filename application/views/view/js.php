@@ -1,9 +1,4 @@
 <script src="<?php echo base_url()?>assets/datatable/jQuery/jquery-3.3.1.min.js"></script>
-
-<!-- <script>
-  $.widget.bridge('uibutton', $.ui.button)
-</script> -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <!-- Bootstrap 4 -->
 <script src="<?php echo base_url()?>assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- ChartJS -->
@@ -26,8 +21,10 @@
 <script src="<?php echo base_url()?>assets/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
 <!-- AdminLTE App -->
 <script src="<?php echo base_url()?>assets/dist/js/adminlte.js"></script>
-<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-<!--<script src="<?php //echo base_url()?>assets/dist/js/pages/dashboard.js"></script>-->
+<!-- SweetAlert2 -->
+<script src="<?php echo base_url()?>assets/plugins/sweetalert2/sweetalert2.min.js"></script>
+<!-- Toastr -->
+<script src="<?php echo base_url()?>assets/plugins/toastr/toastr.min.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="<?php echo base_url()?>assets/dist/js/demo.js"></script>
 <!-- DataTables -->
@@ -41,8 +38,8 @@
 <script src="<?php echo base_url()?>assets/plugins/bootstrap-switch/js/bootstrap-switch.min.js"></script>
 <!-- Select2 -->
 <script src="<?php echo base_url()?>assets/plugins/select2/js/select2.full.min.js"></script>
-<!-- date-range-picker -->
-<script src="<?php echo base_url()?>assets/plugins/daterangepicker/daterangepicker.js"></script>
+<!-- Bootstrap4 Duallistbox -->
+<script src="<?php echo base_url()?>assets/plugins/bootstrap4-duallistbox/jquery.bootstrap-duallistbox.min.js"></script>
 
 
 <script>
@@ -50,6 +47,10 @@
 $("input[data-bootstrap-switch]").each(function(){
   $(this).bootstrapSwitch('state', $(this).prop('checked'));
 });
+
+// $.widget.bridge('uibutton', $.ui.button);
+
+
 
 //select2bs4
 $('.select2bs4').select2({
@@ -92,4 +93,30 @@ $(document).ready(function(){
         }]
     });
 });
+
+
+$(function() {
+    const Toast = Swal.mixin({
+      toast: true,
+      position: 'top-end',
+      showConfirmButton: false,
+      timer: 3000
+    });
+
+    $('.swalDefaultSuccess').click(function() {
+      Toast.fire({
+        type: 'success',
+        title: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
+      })
+    });
+    $('.swalDefaultError').click(function() {
+      Toast.fire({
+        type: 'error',
+        title: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
+      })
+    });
+});
+
+// Summernote
+$('.textarea').summernote()
 </script>

@@ -1,6 +1,6 @@
 <?php if ($this->session->flashdata('success')){?>
-  <div class="card bg-gradient-success">
-    <div class="card-header">
+  <div class="card bg-gradient-success swalDefaultSuccess">
+    <div class="card-header swalDefaultSuccess">
       <?php echo $this->session->flashdata('success'); ?>
       <div class="card-tools">
         <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i>

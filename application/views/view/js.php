@@ -62,7 +62,8 @@ $('.select2bs4').select2({
 if ($judul == "Kelola Kategori")
 {
    $direktori="index.php/berita/getListsKategori/";
-} else if ($judul == "Kelola Berita")
+}
+else if ($judul == "Kelola Berita")
 {
   $direktori="index.php/berita/getListsBerita/";
 }
@@ -73,6 +74,14 @@ if ($judul == "Kelola Kategori")
  else if ($judul == "Kelola Pelanggan")
 {
   $direktori="index.php/kelola/getListsPelanggan/";
+}
+ else if ($judul == "Kelola Trayek")
+{
+  $direktori="index.php/kelola/getListsTrayek/";
+}
+ else if ($judul == "Kelola Kendaraan")
+{
+  $direktori="index.php/kelola/getListsKendaraan/";
 }
 ?>
 <script>

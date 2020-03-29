@@ -147,7 +147,7 @@
           <a href="#" class="nav-link">
             <i class="nav-icon fas fa-edit"></i>
             <p>
-              Kelola E-Travel BELUM
+              Kelola E-Travel
               <i class="fas fa-angle-left right"></i>
             </p>
           </a>
@@ -158,12 +158,12 @@
                 <p>Kelola Trayek</p>
               </a>
             </li>
-            <li class="nav-item">
-              <a href="<?php echo base_url().'index.php/Kelola/jadwal'?>" class="nav-link">
+            <!-- <li class="nav-item">
+              <a href="<?php //echo base_url().'index.php/Kelola/jadwal'?>" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Kelola Jadwal Travel</p>
               </a>
-            </li>
+            </li> -->
             <li class="nav-item">
               <a href="<?php echo base_url().'index.php/Kelola/Staff'?>" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>

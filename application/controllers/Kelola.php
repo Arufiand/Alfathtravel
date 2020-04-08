@@ -42,7 +42,6 @@ class Kelola extends CI_Controller{
 
     function trayek(){
         $data['provinsiJatim'] = $this->m_crud->get_kotaJatim();
-
         $data['judul'] = "Kelola Trayek";
         $data['surname'] = "Trayek";
         $this->load->view('kelola/trayek',$data);

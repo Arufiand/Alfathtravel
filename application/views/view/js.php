@@ -62,26 +62,37 @@ $('.select2bs4').select2({
 if ($judul == "Kelola Kategori")
 {
    $direktori="index.php/berita/getListsKategori/";
+   $subdirektori="kelola/get_subprovinsi";
 }
 else if ($judul == "Kelola Berita")
 {
   $direktori="index.php/berita/getListsBerita/";
+  $subdirektori="kelola/get_subprovinsi";
 }
  else if ($judul == "Kelola Staff")
 {
   $direktori="index.php/kelola/getListsStaff/";
+  $subdirektori="index.php/kelola/get_subprovinsi";
 }
  else if ($judul == "Kelola Pelanggan")
 {
   $direktori="index.php/kelola/getListsPelanggan/";
+  $subdirektori="index.php/kelola/get_subprovinsi";
 }
  else if ($judul == "Kelola Trayek")
 {
   $direktori="index.php/kelola/getListsTrayek/";
+
 }
  else if ($judul == "Kelola Kendaraan")
 {
   $direktori="index.php/kelola/getListsKendaraan/";
+
+}
+ else if ($judul == "Manajemen Pengiriman")
+{
+  $direktori="index.php/pengiriman/getListsPengiriman/";
+  $subdirektori="index.php/pengiriman/get_subprovinsi";
 }
 ?>
 <script>
@@ -135,7 +146,7 @@ $(document).ready(function(){
   $('#provinsi').change(function(){
     var id=$(this).val();
     $.ajax({
-      url : "<?php echo base_url();?>index.php/kelola/get_subprovinsi",
+      url : "<?php echo base_url("$subdirektori"); ?>",
       method : "POST",
       data : {id: id},
       async : false,

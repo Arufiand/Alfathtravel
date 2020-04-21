@@ -107,7 +107,7 @@ class Berita extends CI_Controller{
             $status = ($member->StatusBerita == 1)?'Active':'Inactive';
             $data[] = array(
             $i,
-            $member->Judul,
+            $member->JUDUL,
             $tgl_rilis,
             $tgl_kadaluarsa,
             $member->WaktuRilis,
@@ -187,5 +187,5 @@ class Berita extends CI_Controller{
 		    redirect('index.php/berita/kategori');
 	     }
 
-    
+
 }

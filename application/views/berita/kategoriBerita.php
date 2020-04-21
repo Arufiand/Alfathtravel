@@ -20,7 +20,7 @@
         <div class="container-fluid">
           <?php $this->load->view('view/notif'); ?>
         <!--Inputan-->
-        <div class="card card-warning">
+        <div class="card card-primary">
           <div class="card-header">
             <h3 class="card-title">Post Kategori Berita</h3>
             <div class="card-tools">
@@ -31,40 +31,8 @@
           </div>
           <!-- /.card-header -->
           <!-- form start -->
-          <form role="form" id="quickForm" action="<?php echo base_url(). 'index.php/berita/inputKategori'?>" method="post">
-            <div class="card-body">
-              <div class="row">
-                <div class="col-sm-6">
-                  <div class="form-group">
-                    <label for="exampleInputEmail1">Kategori Baru</label>
-                    <input type="text" name="kategori" class="form-control" id="kategori" placeholder="Nama Kategori Berita">
-                  </div>
-                  <div class="form-group">
-                    <label for="exampleInputEmail1">Status Kategori     </label>
-                    <input type="checkbox" name="inputStatus" value=1 checked data-bootstrap-switch>
-                  </div>
-                </div>
-
-              </div>
-            </div>
-            <!-- /.card-body -->
-            <div class="card-footer">
-              <button type="submit" class="btn btn-primary">Submit</button>
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            </div>
-          </form>
-        </div>
-        <!--End Inputan-->
-
-        <!--Tabel serverside datatable-->
-        <div class="card card-primary">
-          <div class="card-header">
-            <h3 class="card-title">Data <?php echo $surname?> Alfath</h3>
-            <div class="card-tools">
-              <button type="button" class="btn btn-tool btn-sm" data-card-widget="collapse" data-toggle="tooltip"
-                      title="Collapse" collapsed>
-                <i class="fas fa-minus"></i></button>
-            </div>
+          <div class="card-footer">
+            <button type="button" class="btn btn-outline-primary btn-sm" data-toggle="modal" data-target="#modal-lg">Tambah Data</button>
           </div>
           <!-- /.card-header -->
           <div class="card-body">
@@ -87,13 +55,51 @@
               </tfoot>
             </table>
           </div>
-          <!-- /.card-body -->
+
+          <!-- Modal Start -->
+          <div class="modal fade" id="modal-lg">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h4 class="modal-title">Large Modal</h4>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <form role="form" id="quickForm" action="<?php echo base_url(). 'index.php/berita/inputKategori'?>" method="post">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-sm-6">
+                      <div class="form-group">
+                        <label for="exampleInputEmail1">Kategori Baru</label>
+                        <input type="text" name="kategori" class="form-control" id="kategori" placeholder="Nama Kategori Berita">
+                      </div>
+                      <div class="form-group">
+                        <label for="exampleInputEmail1">Status Kategori</label>
+                        <input type="checkbox" name="inputStatus" value=1 checked data-bootstrap-switch>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- /.card-body -->
+                <div class="modal-footer justify-content-between">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                  <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+              </form>
+              </div>
+
+              <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+          </div>
+          <!-- Modal End -->
         </div>
+        <!--End Inputan-->
         <!--End Tabel serverside datatable-->
         </div>
       </section>
   </div>
-
 
   <!-- /.content-wrapper -->
   <?php $this->load->view('view/footer'); ?>

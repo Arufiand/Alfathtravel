@@ -1,15 +1,6 @@
-<script src="<?php echo base_url()?>assets/datatable/jQuery/jquery-3.3.1.min.js"></script>
+<script src="<?php echo base_url()?>assets/datatable/jQuery/jquery-3.3.1.js"></script>
 <!-- Bootstrap 4 -->
 <script src="<?php echo base_url()?>assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-<!-- ChartJS -->
-<script src="<?php echo base_url()?>assets/plugins/chart.js/Chart.min.js"></script>
-<!-- Sparkline -->
-<script src="<?php echo base_url()?>assets/plugins/sparklines/sparkline.js"></script>
-<!-- JQVMap -->
-<script src="<?php echo base_url()?>assets/plugins/jqvmap/jquery.vmap.min.js"></script>
-<script src="<?php echo base_url()?>assets/plugins/jqvmap/maps/jquery.vmap.usa.js"></script>
-<!-- jQuery Knob Chart -->
-<script src="<?php echo base_url()?>assets/plugins/jquery-knob/jquery.knob.min.js"></script>
 <!-- daterangepicker -->
 <script src="<?php echo base_url()?>assets/plugins/moment/moment.min.js"></script>
 <script src="<?php echo base_url()?>assets/plugins/daterangepicker/daterangepicker.js"></script>
@@ -28,9 +19,11 @@
 <!-- AdminLTE for demo purposes -->
 <script src="<?php echo base_url()?>assets/dist/js/demo.js"></script>
 <!-- DataTables -->
-<script src="<?php echo base_url()?>assets/plugins/datatables/jquery.dataTables.js"></script>
+<script src="<?php echo base_url()?>assets/datatable/jQuery/jquery.dataTables.min.js"></script>
 <script src="<?php echo base_url()?>assets/plugins/datatables-bs4/js/dataTables.bootstrap4.js"></script>
+<!-- DataTables Responsive -->
 <script src="<?php echo base_url()?>assets/datatable/responsive/responsive.js"></script>
+
 <!-- jquery-validation -->
 <script src="<?php echo base_url()?>assets/plugins/jquery-validation/jquery.validate.min.js"></script>
 <script src="<?php echo base_url()?>assets/plugins/jquery-validation/additional-methods.min.js"></script>
@@ -41,6 +34,22 @@
 <!-- Bootstrap4 Duallistbox -->
 <script src="<?php echo base_url()?>assets/plugins/bootstrap4-duallistbox/jquery.bootstrap-duallistbox.min.js"></script>
 
+
+<!-- ChartJS -->
+<!-- <script src="<?php echo base_url()?>assets/plugins/chart.js/Chart.min.js"></script> -->
+<!-- Sparkline -->
+<!-- <script src="<?php echo base_url()?>assets/plugins/sparklines/sparkline.js"></script> -->
+<!-- JQVMap -->
+<!-- <script src="<?php echo base_url()?>assets/plugins/jqvmap/jquery.vmap.min.js"></script>
+<script src="<?php echo base_url()?>assets/plugins/jqvmap/maps/jquery.vmap.usa.js"></script> -->
+<!-- Datatables Button -->
+<!-- <script src="<?php echo base_url()?>assets/datatable/button/js/dataTables.buttons.min.js"></script>
+<script src="<?php echo base_url()?>assets/datatable/button/js/buttons.print.min.js"></script>
+<script src="<?php echo base_url()?>assets/datatable/button/js/buttons.colVis.min.js"></script>
+<script src="<?php echo base_url()?>assets/datatable/button/js/buttons.html5.min.js"></script>
+<script src="<?php echo base_url()?>assets/datatable/button/js/buttons.bootstrap4.min.js"></script> -->
+<!-- jQuery Knob Chart -->
+<!-- <script src="<?php echo base_url()?>assets/plugins/jquery-knob/jquery.knob.min.js"></script> -->
 
 <script>
 //checked State B4
@@ -97,27 +106,29 @@ else if ($judul == "Kelola Berita")
 ?>
 <script>
 $(document).ready(function(){
-    $('#memListTable').DataTable({
-        "responsive": true,
+    var table = $('#memListTable').DataTable({
+        fixedHeader: true,
+        responsive: true,
         // Processing indicator
-        "processing": true,
+        processing: true,
         // DataTables server-side processing mode
-        "serverSide": true,
+        serverSide: true,
         // Initial no order.
-        "order": [],
+        order: [],
         // Load data from an Ajax source
-        "ajax": {
-            "url": "<?php echo base_url("$direktori"); ?>",
-            "type": "POST"
+        ajax: {
+            url: "<?php echo base_url("$direktori"); ?>",
+            type: "POST"
         },
         //Set column definition initialisation properties
-        "columnDefs": [{
-            "targets": [0],
-            "orderable": false
+        columnDefs: [{
+            targets: [0],
+            orderable: false
         }]
     });
+    // table.buttons().container()
+    //     .appendTo( '#example_wrapper .col-md-6:eq(0)' );
 });
-
 
 $(function() {
     const Toast = Swal.mixin({
